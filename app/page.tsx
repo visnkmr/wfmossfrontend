@@ -12,7 +12,7 @@ import Footer from "../src/components/footer";
 import '../styles/globals.css'
 // import Ct from "../src/components/ct";
 const Ct =dynamic(()=>import ("../src/components/ct"));
-
+import InitUI from "../components/initui"
 // const Commits =dynamic(()=>import ("../src/components/commits"));
 // import Commits from "../src/components/commits";
 import Topthread from "../src/components/topthread";
@@ -20,6 +20,7 @@ import DarkButton from "./but";
 import Mq from "../src/components/mq";
 import Contactme from "../src/components/contactme";
 import Link from 'next/link';
+import { Input } from '../components/ui/input';
 // import { ThemeContext, ThemeProvider } from "../src/components/ThemeContext";
 // import { useContext } from "react";
 // import { createServerContext } from 'react';
@@ -27,56 +28,25 @@ import Link from 'next/link';
 // import dwc from "../src/dealcommits";
 // import gtr from "./api/gtr";
 
-interface listoffiles
-  {
-    filename:string,
-    openapi:string,
-    downloadapi:string,
-    filesize:number,
-    lastmodified:string
+// let lof:listoffiles[]=[
+//   {
+//     filename:"filename1.extension",
+//     openapi:"/delete.html?path=",
+//     downloadapi:"/download/filename?path=",
+//     filesize:0,
+//     lastmodified:"days ago"
 
-  };
-let lof:listoffiles[]=[
-  {
-    filename:"filename1.extension",
-    openapi:"/delete.html?path=",
-    downloadapi:"/download/filename?path=",
-    filesize:0,
-    lastmodified:"days ago"
+//   },{
+//     filename:"filename2.extension",
+//     openapi:"/delete.html?path=",
+//     downloadapi:"/download/filename?path=",
+//     filesize:0,
+//     lastmodified:"days ago"
 
-  },{
-    filename:"filename2.extension",
-    openapi:"/delete.html?path=",
-    downloadapi:"/download/filename?path=",
-    filesize:0,
-    lastmodified:"days ago"
+//   }
+// ];
 
-  }
-];
-function getlistoffilesfromapi(lof:listoffiles[]): import("react").ReactNode {
-  return (
-    <>
-  {lof.map((each:listoffiles) => {
-      return ( 
-        <tr>
-          <td>
-            <Link href={each.openapi}>Open on tv</Link>
-          </td>
-          <td>
-            <Link href={each.downloadapi}>{each.filename}</Link>
-          </td>
-          <td>
-            <p>{each.filesize}</p>
-          </td>
-          <td>
-            <p>{each.lastmodified}</p>
-          </td>
-        </tr>
-      );
-  })}
-  </>
-  );
-  }
+
 export default function Page() {
   
 
@@ -91,11 +61,7 @@ export default function Page() {
       {/* <ThemeProvider> */}
       {/* <div className={dark ? 'dark' : ''}> */}
       <div className="dark:bg-gray-900 flex flex-col justify-center p-10">
-          <p>Selected storage has </p>
-          <table>
-            {getlistoffilesfromapi(lof)}
-            
-          </table>
+          <InitUI/>
           {/* <Homepage/> */}
           {/* <Planglist/> */}
           {/* <Project/>
