@@ -7,6 +7,11 @@ export default function InitUI(){
     const [ipaddress, setipaddress] = useState("");
     return(
         <>
+        <form className="fileUpload" method="post" action="/upload.html" encType="multipart/form-data">
+            <Input type="file" name="upfile" id="fileinput" required={true}/>
+            <Input type="submit" value="Send"/>
+        </form>
+        <progress id="pr" max="100" value="77.68211229853571"></progress>
     <Input
         placeholder='Filter by reponame...'
         onChange={(event) =>
