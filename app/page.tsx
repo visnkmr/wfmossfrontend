@@ -2,25 +2,25 @@
 import dynamic from 'next/dynamic'
 
 // import Project from "../src/components/project";
-const Project =dynamic(()=>import ("../src/components/project"));
+// const Project =dynamic(()=>import ("../src/components/project"));
 
-import Homepage from "../src/components/homepage";
-// import Planglist from "../src/components/planlist";
-// import Stats from "../src/components/stats";
-import Workinp from "../src/components/wip";
-import Footer from "../src/components/footer";
+// import Homepage from "../src/components/homepage";
+// // import Planglist from "../src/components/planlist";
+// // import Stats from "../src/components/stats";
+// import Workinp from "../src/components/wip";
+// import Footer from "../src/components/footer";
 import '../styles/globals.css'
-// import Ct from "../src/components/ct";
-const Ct =dynamic(()=>import ("../src/components/ct"));
+// // import Ct from "../src/components/ct";
+// const Ct =dynamic(()=>import ("../src/components/ct"));
 import InitUI from "../components/initui"
 // const Commits =dynamic(()=>import ("../src/components/commits"));
 // import Commits from "../src/components/commits";
-import Topthread from "../src/components/topthread";
-import DarkButton from "./but";
-import Mq from "../src/components/mq";
-import Contactme from "../src/components/contactme";
-import Link from 'next/link';
-import { Input } from '../components/ui/input';
+// import Topthread from "../src/components/topthread";
+// import DarkButton from "./but";
+// import Mq from "../src/components/mq";
+// import Contactme from "../src/components/contactme";
+// import Link from 'next/link';
+// import { Input } from '../components/ui/input';
 // import { ThemeContext, ThemeProvider } from "../src/components/ThemeContext";
 // import { useContext } from "react";
 // import { createServerContext } from 'react';
