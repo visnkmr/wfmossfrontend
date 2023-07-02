@@ -28,7 +28,7 @@ export default function RootLayout({
         <Providers>
 
         {/* <Thedarkhtml> */}
-        <Topthread/>
+        {/* <Topthread/> */}
         <DarkButton/>
         {children}
         <Footer/>

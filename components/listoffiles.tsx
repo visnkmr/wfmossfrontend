@@ -17,6 +17,7 @@ interface listoffiles
     ipaddress:string
   }
 export function Getlistoffilesfromapi({ipaddress}:filelistprops) {
+  console.log("loading filelist")
     return (
       <>
     {listoffiles(ipaddress).map((each:listoffiles) => {
@@ -43,18 +44,19 @@ export function Getlistoffilesfromapi({ipaddress}:filelistprops) {
 export default function listoffiles(ipaddress:string):listoffiles[]{
     console.log(ipaddress)
     if(ipaddress===""){
-        ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
+        // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
+        ipaddress=""
     }
     else{
         ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
-    
+    console.log(ipaddress)
     let { data } = useQuery({ queryFn: async()=>{
         const response = await axios.get(ipaddress)
-        console.log(response.data)
-          return await response.data
+        // console.log(response.data)
+          return response.data
       } })
-      if(!data){
+      if(!Array.isArray(data)){
         data=[]
       }
         return data;
