@@ -5,7 +5,7 @@ import { Providers } from "../src/components/ThemeContext"
 import Footer from "../src/components/footer"
 // import Thedarkhtml from "../src/components/thedarkhtml"
 import Topthread from "../src/components/topthread"
-import { useLocalStorage } from "../src/components/useLocalStorage"
+// import { useLocalStorage } from "../src/components/useLocalStorage"
 import '../styles/globals.css'
 import DarkButton from "./but"
 import {Metadata} from 'next'
@@ -29,7 +29,7 @@ export default function RootLayout({
 
         {/* <Thedarkhtml> */}
         <Topthread/>
-        {/* <DarkButton/> */}
+        <DarkButton/>
         {children}
         <Footer/>
         {/* </Thedarkhtml> */}
