@@ -4,7 +4,7 @@ import axios from 'axios'
 import Link from "next/link";
 import React from "react";
 
-interface listoffiles
+interface lofiles
   {
     filename:string,
     openapi:string,
@@ -20,8 +20,10 @@ export function Getlistoffilesfromapi({ipaddress}:filelistprops) {
   console.log("loading filelist")
     return (
       <>
-    {listoffiles(ipaddress).map((each:listoffiles) => {
+      <h2>Updated: {ipaddress}</h2>
+    {listoffiles(ipaddress).map((each:lofiles) => {
         return ( 
+
           <tr>
             <td>
               <Link href={each.openapi}>Open on tv</Link>
@@ -41,7 +43,7 @@ export function Getlistoffilesfromapi({ipaddress}:filelistprops) {
     </>
     );
     }
-export default function listoffiles(ipaddress:string):listoffiles[]{
+export default function listoffiles(ipaddress:string):lofiles[]{
     console.log(ipaddress)
     if(ipaddress===""){
         // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
