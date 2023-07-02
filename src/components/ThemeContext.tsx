@@ -30,6 +30,7 @@ import { ThemeProvider } from 'next-themes'
 
 export function Providers({ children }:tpprops) {
   const [queryClient] = React.useState(() => new QueryClient())
+  // let qc=;
   
 
     // const [mounted, setMounted] = useState(false)

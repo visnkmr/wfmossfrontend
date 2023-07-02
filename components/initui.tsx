@@ -1,7 +1,9 @@
 'use client'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 import React, { useRef, useState } from "react";
 import { Input } from '../components/ui/input';
-import listoffiles, { Getlistoffilesfromapi } from '../components/listoffiles'
+import { getlistoffilesfromapi } from '../components/listoffiles'
 import {useSearchParams} from 'next/navigation'
 import Link from "next/link";
 
@@ -10,6 +12,7 @@ export default function InitUI(){
 
     const [ipaddress, setipaddress] = useState("");
     const handleClick = () => {
+      console.log("clicked")
       // 👇 "inputRef.current.value" is input value
       setipaddress(inputRef.current.value);
     };
@@ -25,25 +28,7 @@ export default function InitUI(){
     return(
         <>
         <h2>Updated: {ipaddress}</h2>
-        {listoffiles(ipaddress).map((each:any) => {
-        return ( 
-          
-          <tr>
-            <td>
-              <Link href={each.openapi}>Open on tv</Link>
-            </td>
-            <td>
-              <Link href={each.downloadapi}>{each.filename}</Link>
-            </td>
-            <td>
-              <p>{each.filesize}</p>
-            </td>
-            <td>
-              <p>{each.lastmodified}</p>
-            </td>
-          </tr>
-        );
-    })}
+       
         <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
         <div className="flex justify-center p-2">
 <Input
@@ -76,9 +61,10 @@ export default function InitUI(){
         </div>
     
         <table>
-          <Getlistoffilesfromapi ipaddress={ipaddress}/>
+          {getlistoffilesfromapi(ipaddress)}
           
         </table>
+        <ReactQueryDevtools/>        
         </>
         );
 }
