@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-import '../../styles/committablestyle.css'
+// import '../../styles/committablestyle.css'
 import { columns_full } from './columns_full';
 import Dtable from './dtable'
 

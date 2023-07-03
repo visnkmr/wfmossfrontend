@@ -9,6 +9,8 @@ import Link from "next/link";
 
 export default function InitUI(){
   const inputRef = useRef(null);
+  const [ipvis,setipvis] = useState(false);
+  const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams()
 
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
@@ -27,20 +29,28 @@ export default function InitUI(){
     // }, []) // <-- empty array means 'run once'
     return(
         <>
-        <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
+        <div>
+          <Button onClick={()=>{setipvis(!ipvis)}}>IP</Button>
+          <Button onClick={()=>{setufvis(!ufvis)}}>Upload</Button>
+        </div>
+        <div className={ipvis ? '' : 'hidden'}>
+          <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
        
         <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
         <div className="flex justify-center p-2">
-<Input
-    id="ipaddress"
-    ref={inputRef}
-    placeholder='Enter IP Address'
-    className='max-w-sm'
-    defaultValue={ipaddress}
-  />
-  <Button variant="destructive" onClick={handleClick} className="pl-2">Test</Button>
-</div>
-    
+          <Input
+              id="ipaddress"
+              ref={inputRef}
+              placeholder='Enter IP Address'
+              className='max-w-sm'
+              defaultValue={ipaddress}
+            />
+          <Button onClick={handleClick} variant={"default"}>Connect</Button>
+        </div>
+        </div>
+        
+    <div className={ufvis ? '' : 'hidden'}>
+
         <div className="flex justify-center p-5">
         <form method="post" action="/upload.html" encType="multipart/form-data">
             <p className="mb-5 mt-5 flex justify-center">{"Send files to"}</p>
@@ -50,6 +60,8 @@ export default function InitUI(){
           </div>
         </form>
         </div>
+    </div>
+
         <div className="flex justify-center p-5">
       <div className="flex flex-col flex-wrap">
         <ProgressDemo/>
