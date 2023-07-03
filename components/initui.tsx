@@ -53,8 +53,8 @@ export default function InitUI(){
         </div>
         <div className="flex justify-center p-5">
       <div className="flex flex-col flex-wrap">
-
-        <progress id="pr" max="100" value="77.68211229853571"></progress>
+        <ProgressDemo/>
+        {/* <progress id="pr" max="100" value="77.68211229853571"></progress> */}
         <p>
           Seleted Storage has
         </p>
@@ -81,4 +81,17 @@ export default function InitUI(){
         <ReactQueryDevtools/>        
         </>
         );
+}
+
+import { Progress } from "../components/ui/progress"
+
+export function ProgressDemo() {
+  const [progress, setProgress] = React.useState(13)
+ 
+  React.useEffect(() => {
+    const timer = setTimeout(() => setProgress(66), 500)
+    return () => clearTimeout(timer)
+  }, [])
+ 
+  return <Progress value={progress} className="w-full" />
 }

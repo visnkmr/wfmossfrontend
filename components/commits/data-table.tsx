@@ -145,12 +145,22 @@ export function DataTable<TData, TValue>({
           className='max-w-sm'
         />
       </div> */}
+      <div className='flex items-center py-5'>
+        <Input
+          placeholder='Search by filename'
+          value={(table.getColumn('filename')?.getFilterValue() as string) ?? ''}
+          onChange={(event) =>
+            table.getColumn('filename')?.setFilterValue(event.target.value)
+          }
+          className='max-w-sm'
+        />
+      </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 
             // variant='outline' 
             className='ml-auto'>
-            Columns
+            Choose Columns
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='bg-white dark:bg-gray-900'>
@@ -171,16 +181,7 @@ export function DataTable<TData, TValue>({
             })}
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className='flex items-center py-5'>
-        <Input
-          placeholder='Filter ...'
-          value={(table.getColumn('filename')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('filename')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm'
-        />
-      </div>
+      
       {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 
@@ -207,7 +208,9 @@ export function DataTable<TData, TValue>({
             })}
         </DropdownMenuContent>
       </DropdownMenu> */}
-      <div className='rounded-md border shadow-md'>
+      <div 
+      className='rounded-md border shadow-md'
+      >
         <Table className='text-center'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

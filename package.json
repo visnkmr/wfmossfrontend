@@ -64,6 +64,7 @@
   "sideEffects": false,
   "dependencies": {
     "@next/bundle-analyzer": "^13.4.7",
+    "@radix-ui/react-progress": "^1.0.3",
     "class-variance-authority": "^0.6.1",
     "next-optimized-images": "3.0.0-canary.10",
     "react-fast-marquee": "^1.6.0",
