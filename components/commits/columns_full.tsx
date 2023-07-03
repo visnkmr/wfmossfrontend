@@ -72,7 +72,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
   // },
 
   {
-    accessorKey: 'fileinfo',
+    accessorKey: 'filename',
     header: ({ column }) => {
       return (
         <Button
@@ -93,7 +93,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
       const rname = getValue()
 
       return (
-        <div className=''>
+        <div className='flex flex-col'>
 
           <a href={downloadapi}>{`${filename}`}</a>
             <a href={openapi}>{`open on tv`}</a>

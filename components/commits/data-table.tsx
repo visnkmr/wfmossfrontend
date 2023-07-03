@@ -35,7 +35,7 @@ import {
 } from '../../components/ui/table';
 // import { eCommit } from './columns';
 import { DateTime } from 'luxon';
-import { useSearchParams } from 'next/navigation'
+// import { useSearchParams } from 'next/navigation'
 
 
 interface DataTableProps<TData, TValue> {
@@ -47,10 +47,10 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
  
-  const reponame = searchParams.get('reponame')!==null?searchParams.get('reponame'):""
-  const message = searchParams.get('message')!==null?searchParams.get('message'):""
+  // const reponame = searchParams.get('fileinfo')!==null?searchParams.get('fileinfo'):""
+  // const message = searchParams.get('message')!==null?searchParams.get('message'):""
   // console.log(columns);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -121,18 +121,18 @@ export function DataTable<TData, TValue>({
     // getFacetedRowModel: getFacetedRowModel(),
     // getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  React.useEffect(() => {
+  // React.useEffect(() => {
     
-      table.getColumn('reponame')?.setFilterValue(reponame);
-      table.getColumn('message')?.setFilterValue(message);
-      // console.log("ran once")
+  //     table.getColumn('reponame')?.setFilterValue(reponame);
+  //     table.getColumn('message')?.setFilterValue(message);
+  //     // console.log("ran once")
         
-    // code to run after render goes here
-  }, []) // <-- empty array means 'run once'
+  //   // code to run after render goes here
+  // }, []) // <-- empty array means 'run once'
 
   return (
     <div className=''>
-      <div className='flex items-center py-5'>
+      {/* <div className='flex items-center py-5'>
         <Input
           placeholder='Search for...'
           value={(table.getColumn('size')?.getFilterValue() as string) ?? ''}
@@ -144,7 +144,7 @@ export function DataTable<TData, TValue>({
           }
           className='max-w-sm'
         />
-      </div>
+      </div> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 
@@ -174,9 +174,9 @@ export function DataTable<TData, TValue>({
       <div className='flex items-center py-5'>
         <Input
           placeholder='Filter ...'
-          value={(table.getColumn('fileinfo')?.getFilterValue() as string) ?? ''}
+          value={(table.getColumn('filename')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('fileinfo')?.setFilterValue(event.target.value)
+            table.getColumn('filename')?.setFilterValue(event.target.value)
           }
           className='max-w-sm'
         />

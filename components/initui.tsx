@@ -28,7 +28,7 @@ export default function InitUI(){
 }, [ipad]) // <-- empty array means 'run once'
     return(
         <>
-        <h2>Updated: {ipaddress}</h2>
+        <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
        
         <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
         <div className="flex justify-center p-2">

@@ -17,18 +17,17 @@ export interface lofiles
   interface filelistprops {
     ipaddress:string
   }
-export  function getlistoffilesfromapi(ipaddress:string) {
-  // let data:any[] =[];
-  // let isError=false;
-    console.log(ipaddress)
-    if(ipaddress===""){
-    
+  export function getData(ipaddress:string): lofiles[] {
+    // let ipaddress=""
+      // nextjs 13 fetching api from our api folder/payments
+      if(ipaddress===""){
+      
         // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
         ipaddress=""
     }
     else{
       // data =a;
-
+  
         ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
@@ -39,13 +38,10 @@ export  function getlistoffilesfromapi(ipaddress:string) {
       queryKey:["lfl"],
       
       queryFn: async()=>{
-        if(ipaddress==="")
-          return [];
-        else
-          return a;
-        // const response = await axios.get(ipaddress)
+        
+        const response = await axios.get(ipaddress)
         // console.log(response.data)
-          // return response.data
+          return response.data
       },
       retry:false,
       // refetchOnMount:true,
@@ -64,7 +60,18 @@ export  function getlistoffilesfromapi(ipaddress:string) {
         console.log("error or not array")
         data=[]
       }
-      console.log("loading layout")
+    
+      //  await fetch('http://localhost:3000/api/payments' || 'https://demo-table-eight.vercel.app', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
+      // const data = await res.json();
+      return data;
+    }
+export  function getlistoffilesfromapi(ipaddress:string) {
+  
       // console.log(data)
         // return data;
         return (
