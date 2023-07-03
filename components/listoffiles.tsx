@@ -3,6 +3,7 @@ import { useQuery,useQueryClient } from "@tanstack/react-query";
 import axios from 'axios'
 import Link from "next/link";
 import React from "react";
+import a from "../exampleapisresponses/samplefileapi.json"
 
 interface lofiles
   {
@@ -17,13 +18,17 @@ interface lofiles
     ipaddress:string
   }
 export  function getlistoffilesfromapi(ipaddress:string) {
-  
+  // let data:any[] =[];
+  // let isError=false;
     console.log(ipaddress)
     if(ipaddress===""){
+    
         // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
         ipaddress=""
     }
     else{
+      // data =a;
+
         ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
@@ -33,28 +38,34 @@ export  function getlistoffilesfromapi(ipaddress:string) {
       queryKey:["lfl"],
       
       queryFn: async()=>{
-        const response = await axios.get(ipaddress)
+        if(ipaddress==="")
+          return [];
+        else
+          return a;
+        // const response = await axios.get(ipaddress)
         // console.log(response.data)
-          return response.data
+          // return response.data
       },
       retry:false,
       // cacheTime:0
       
     
     })
+    
+    
       if(!Array.isArray(data) || isError){
         console.log("error or not array")
         data=[]
       }
         // return data;
         return (
-          <>
-          <h2>Updated: {ipaddress}</h2>
-        { data.map((each:lofiles) => {
+          <div>
+        { data.map((each:lofiles,index:number) => {
             return ( 
               <>
-              <h1>row</h1>
-              <tr>
+              <p key={index}>{JSON.stringify(each)} {index}</p>
+              {/* <tr
+              key={Date.now()}>
                 <td>
                   <Link href={each.openapi}>Open on tv</Link>
                 </td>
@@ -67,10 +78,10 @@ export  function getlistoffilesfromapi(ipaddress:string) {
                 <td>
                   <p>{each.lastmodified}</p>
                 </td>
-              </tr>
+              </tr> */}
               </>
             );
         })}
-        </>
+        </div>
         );
 }

@@ -59,11 +59,24 @@ export default function InitUI(){
         </p>
       </div>
         </div>
-    
-        <table>
+    <div>
+      {/* <table>
+        <thead>
+          <tr>
+            <td>sample</td>
+            <td>sample</td>
+            <td>sample</td>
+            <td>sample</td>
+          </tr>
+        </thead>
+        <tbody> */}
+        <div>
+
           {getlistoffilesfromapi(ipaddress)}
-          
-        </table>
+        </div>
+        {/* </tbody>
+      </table> */}
+    </div>
         <ReactQueryDevtools/>        
         </>
         );
