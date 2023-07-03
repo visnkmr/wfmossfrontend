@@ -209,7 +209,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenuContent>
       </DropdownMenu> */}
       <div 
-      className='rounded-md border shadow-md'
+      // className='rounded-md border shadow-md'
       >
         <Table className='text-center'>
           <TableHeader>

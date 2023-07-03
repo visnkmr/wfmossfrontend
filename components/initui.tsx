@@ -9,23 +9,22 @@ import Link from "next/link";
 
 export default function InitUI(){
   const inputRef = useRef(null);
+  const searchParams = useSearchParams()
 
-    const [ipaddress, setipaddress] = useState("");
+    const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
       console.log("clicked")
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
       setipaddress(inputRef.current.value);
     };
-    const searchParams = useSearchParams()
-    const ipad = searchParams.get('ipaddress')!==null?searchParams.get('ipaddress'):""
     
-    React.useEffect(() => {
-    setipaddress(ipad as string)
-    // console.log("ran once")
-      
-  // code to run after render goes here
-}, [ipad]) // <-- empty array means 'run once'
+    // React.useEffect(() => {
+    //     setipaddress(ipad as string)
+    //     // console.log("ran once")
+          
+    //   // code to run after render goes here
+    // }, []) // <-- empty array means 'run once'
     return(
         <>
         <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
@@ -39,7 +38,7 @@ export default function InitUI(){
     className='max-w-sm'
     defaultValue={ipaddress}
   />
-  <button onClick={handleClick} className="pl-2">Test</button>
+  <Button variant="destructive" onClick={handleClick} className="pl-2">Test</Button>
 </div>
     
         <div className="flex justify-center p-5">
@@ -84,6 +83,7 @@ export default function InitUI(){
 }
 
 import { Progress } from "../components/ui/progress"
+import { Button } from './ui/button';
 
 export function ProgressDemo() {
   const [progress, setProgress] = React.useState(13)
