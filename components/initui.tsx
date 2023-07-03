@@ -14,6 +14,7 @@ export default function InitUI(){
     const handleClick = () => {
       console.log("clicked")
       // 👇 "inputRef.current.value" is input value
+      console.log(inputRef.current.value);
       setipaddress(inputRef.current.value);
     };
     const searchParams = useSearchParams()

@@ -4,8 +4,8 @@ import axios from 'axios'
 import Link from "next/link";
 import React from "react";
 import a from "../exampleapisresponses/samplefileapi.json"
-
-interface lofiles
+import ListCommits from "./commits/commits"
+export interface lofiles
   {
     filename:string,
     openapi:string,
@@ -35,6 +35,7 @@ export  function getlistoffilesfromapi(ipaddress:string) {
   //   let qc=useQueryClient();
   // qc.invalidateQueries(["lfl"]);
     let { data,isError } = useQuery({ 
+      // enabled:false,
       queryKey:["lfl"],
       
       queryFn: async()=>{
@@ -47,24 +48,33 @@ export  function getlistoffilesfromapi(ipaddress:string) {
           // return response.data
       },
       retry:false,
-      // cacheTime:0
+      // refetchOnMount:true,
+      
+      cacheTime:0,
+      staleTime:0,
+      // refetchOnWindowFocus:false,
+      
       
     
     })
+    // refetch();
     
     
       if(!Array.isArray(data) || isError){
         console.log("error or not array")
         data=[]
       }
+      console.log("loading layout")
+      // console.log(data)
         // return data;
         return (
-          <div>
-        { data.map((each:lofiles,index:number) => {
+          <div key={Date.now()}>
+            <ListCommits ipaddress={ipaddress}/>
+        {/*{ data.map((each:lofiles,index:number) => {
             return ( 
               <>
-              <p key={index}>{JSON.stringify(each)} {index}</p>
-              {/* <tr
+              <p key={index}>{JSON.stringify(each)} {index+"."+Date.now()}</p>
+              /~ <tr
               key={Date.now()}>
                 <td>
                   <Link href={each.openapi}>Open on tv</Link>
@@ -78,10 +88,10 @@ export  function getlistoffilesfromapi(ipaddress:string) {
                 <td>
                   <p>{each.lastmodified}</p>
                 </td>
-              </tr> */}
+              </tr> ~/
               </>
             );
-        })}
+        })}*/}
         </div>
         );
 }
