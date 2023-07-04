@@ -64,10 +64,13 @@ export interface lofiles
     // refetch();
     
     
-      if(!Array.isArray(data) || isError){
-        console.log("error or not array")
-        data=[]
-      }
+      // if(!Array.isArray(data) || isError){
+      //   console.log("error or not array")
+      //   data=[]
+      // }
+      console.log(data)
+      if(!data)
+        data=""
     
       //  await fetch('http://localhost:3000/api/payments' || 'https://demo-table-eight.vercel.app', {
       //   method: 'GET',

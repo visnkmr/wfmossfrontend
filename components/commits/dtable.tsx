@@ -15,7 +15,11 @@ import {getData, lofiles} from "../listoffiles"
     ipaddress:string;
   }
   export default function Dtable({columns,ipaddress}:dtableprops) {
-    const data = getData(ipaddress).filelist;
+    let data = getData(ipaddress).filelist;
+    if(!Array.isArray(data) ){
+      console.log("error or not array")
+      data=[]
+    }
   
     return (
       
