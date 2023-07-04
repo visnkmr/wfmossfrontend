@@ -33,20 +33,20 @@ export default function InitUI(){
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
         </div>
-        <div className={`rounded-md border shadow-md flex-wrap flex flex-col ${ipvis ? '' : 'hidden'}`}>
+        <div className={`rounded-md border shadow-md p-4 m-2 ${ipvis ? '' : 'hidden'}`}>
           <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
        
-        <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
-        <div className="flex justify-center p-2">
-          <Input
-              id="ipaddress"
-              ref={inputRef}
-              placeholder='Enter IP Address'
-              className='max-w-sm'
-              defaultValue={ipaddress}
-            />
-          <Button className="ml-4 rounded-md border shadow-md" onClick={handleClick} variant={"default"}>Connect</Button>
-        </div>
+          <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
+          <div className="flex justify-center p-2">
+            <Input
+                id="ipaddress"
+                ref={inputRef}
+                placeholder='Enter IP Address'
+                className='max-w-sm'
+                defaultValue={ipaddress}
+              />
+            <Button className="ml-4 rounded-md border shadow-md" onClick={handleClick} variant={"default"}>Connect</Button>
+          </div>
         </div>
         
     <div className={ufvis ? '' : 'hidden'}>
