@@ -3,6 +3,14 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const withOptimizedImages = require('next-optimized-images');
 
+const withPWA = require("next-pwa")({
+  pwa: {
+    dest: "public",
+    // register: true,
+    skipWaiting: true,
+    disable:process.env.NODE_ENV === 'development'
+  },
+});
 
 
 
@@ -10,7 +18,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 /** @type {import('next').NextConfig} */
-module.exports = withBundleAnalyzer({
+const nextConfig =
+// withPWA(
+  // withBundleAnalyzer(
+    {
+  // withPWA,
   // withOptimizedImages,
   experimental: {
     // appDir: true,
@@ -176,7 +188,29 @@ module.exports = withBundleAnalyzer({
   //   serverActions:true,
   // },
   reactStrictMode: true,
-  output:"export",
-},
+  // output:"export",
+};
 
-);
+// )
+// );
+module.exports = (_phase, { defaultConfig }) => {
+  const plugins = [
+    [withPWA], 
+    // [withBundleAnalyzer]
+  ]
+  const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
+
+  const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
+    ...defaultConfig,
+    ...nextConfig,
+  })
+const finalConfig = {}
+  Object.keys(wConfig).forEach((key) => {
+    if (!KEYS_TO_OMIT.includes(key)) {
+      finalConfig[key] = wConfig[key]
+    }
+  })
+
+  return finalConfig;
+  // );
+}
