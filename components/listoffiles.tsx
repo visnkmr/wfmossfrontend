@@ -14,6 +14,7 @@ export interface returnedjson{
 }
 export interface lofiles
   {
+    version:number,
     currentpath:string,
     filename:string,
     openapi:string,
