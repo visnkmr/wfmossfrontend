@@ -6,6 +6,8 @@ import React from "react";
 import a from "../exampleapisresponses/samplefileapi.json"
 import ListCommits from "./commits/commits"
 export interface returnedjson{
+  version:number,
+  currentpath:string,
   storageinuse:number;
   totalstorage:number;
   freesize:string;
@@ -14,8 +16,6 @@ export interface returnedjson{
 }
 export interface lofiles
   {
-    version:number,
-    currentpath:string,
     filename:string,
     openapi:string,
     downloadapi:string,
