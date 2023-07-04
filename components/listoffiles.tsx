@@ -14,6 +14,7 @@ export interface returnedjson{
 }
 export interface lofiles
   {
+    currentpath:string,
     filename:string,
     openapi:string,
     downloadapi:string,
@@ -30,8 +31,8 @@ export interface lofiles
       // nextjs 13 fetching api from our api folder/payments
       if(ipaddress===""){
       
-        // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
-        ipaddress=""
+        ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
+        // ipaddress=""
     }
     else{
       // data =a;

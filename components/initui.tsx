@@ -33,7 +33,9 @@ export default function InitUI(){
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
         </div>
-        <div className={`rounded-md border shadow-md p-4 m-2 ${ipvis ? '' : 'hidden'}`}>
+        
+        <div className={`flex justify-center ${ipvis ? '' : 'hidden'}`}>
+        <div className={`rounded-md border shadow-md p-4 m-2 }`}>
           <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
        
           <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
@@ -48,12 +50,13 @@ export default function InitUI(){
             <Button className="ml-4 rounded-md border shadow-md" onClick={handleClick} variant={"default"}>Connect</Button>
           </div>
         </div>
+        </div>
         
-    <div className={ufvis ? '' : 'hidden'}>
+        <div className={`flex justify-center ${ufvis ? '' : 'hidden'}`}>
 
-        <div className="flex justify-center p-5">
+        <div className="flex justify-center p-5 rounded-md border shadow-md m-2 ">
         <form method="post" action="/upload.html" encType="multipart/form-data">
-            <p className="mb-5 mt-5 flex justify-center">{"Send files to"}</p>
+            <p className="mb-5 mt-5 flex justify-center">{"Select file and click Send"}</p>
           <div className="flex flex-row">
             <Input type="file" name="upfile" id="fileinput" required={true}/>
             <Input type="submit" value="Send" className=""/>
