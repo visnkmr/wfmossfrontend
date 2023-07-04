@@ -2,7 +2,7 @@
 import { useQuery,useQueryClient } from "@tanstack/react-query";
 import axios from 'axios'
 import Link from "next/link";
-import React from "react";
+// import React from "react";
 import a from "../exampleapisresponses/samplefileapi.json"
 import ListCommits from "./commits/commits"
 export interface returnedjson{
@@ -37,8 +37,8 @@ export interface lofiles
     }
     else{
       // data =a;
-  
-        ipaddress=`http://${ipaddress}/samplefileapi.json`
+  ipaddress="http://10.0.0.95:55093/api/json/v1"
+        // ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
   //   let qc=useQueryClient();
@@ -72,7 +72,7 @@ export interface lofiles
       //   console.log("error or not array")
       //   data=[]
       // }
-      console.log(data)
+      // console.log(data)
       if(!data || isError)
         data=""
     

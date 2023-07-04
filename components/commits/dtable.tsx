@@ -13,6 +13,7 @@ import {getData, lofiles} from "../listoffiles"
   interface dtableprops{
     columns:ColumnDef<lofiles>[];
     ipaddress:string;
+    // data:lofiles[]
   }
   export default function Dtable({columns,ipaddress}:dtableprops) {
     let data = getData(ipaddress).filelist;

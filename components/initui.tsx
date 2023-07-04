@@ -3,22 +3,48 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Globe,Upload } from 'lucide-react';
 import React, { useRef, useState } from "react";
 import { Input } from '../components/ui/input';
-import { getlistoffilesfromapi } from '../components/listoffiles'
+import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
 import {useSearchParams} from 'next/navigation'
 import Link from "next/link";
-
+// let ft = (ipaddress:string):returnedjson=>{
+//   let { data,isError } = useQuery({ 
+//     // enabled:false,
+//     queryKey:["lfl"],
+    
+//     queryFn: async()=>{
+      
+//       const response = await axios.get(ipaddress)
+//       // return a
+//       // console.log(response.data)
+//         return response.data
+//     },
+//     retry:false,
+//     // refetchOnMount:true,
+    
+//     cacheTime:0,
+    
+//     staleTime:0,
+//     // refetchOnWindowFocus:false,
+    
+    
+  
+//   })
+//   return data
+// }
 export default function InitUI(){
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams()
-
+// let [uua,setuua]=useState("")
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
       console.log("clicked")
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
       setipaddress(inputRef.current.value);
+      // if(ft(ipaddress))
+      // setuua(ft(ipaddress).percentsizefree)
     };
     
     // React.useEffect(() => {
@@ -55,7 +81,7 @@ export default function InitUI(){
         <div className={`flex justify-center ${ufvis ? '' : 'hidden'}`}>
 
         <div className="flex justify-center p-5 rounded-md border shadow-md m-2 ">
-        <form method="post" action="/upload.html" encType="multipart/form-data">
+        <form method="post" action={`http://${ipaddress}/upload.html`} encType="multipart/form-data">
             <p className="mb-5 mt-5 flex justify-center">{"Select file and click Send"}</p>
           <div className="flex flex-row">
             <Input type="file" name="upfile" id="fileinput" required={true}/>
@@ -99,6 +125,8 @@ export default function InitUI(){
 
 import { Progress } from "../components/ui/progress"
 import { Button } from './ui/button';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 export function ProgressDemo() {
   const [progress, setProgress] = React.useState(13)
