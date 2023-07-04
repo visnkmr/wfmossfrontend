@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
+import { Globe,Upload } from 'lucide-react';
 import React, { useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { getlistoffilesfromapi } from '../components/listoffiles'
@@ -29,9 +29,9 @@ export default function InitUI(){
     // }, []) // <-- empty array means 'run once'
     return(
         <>
-        <div>
-          <Button onClick={()=>{setipvis(!ipvis)}}>IP</Button>
-          <Button onClick={()=>{setufvis(!ufvis)}}>Upload</Button>
+        <div className='flex justify-center'>
+          <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
+          <Button variant={"destructive"} className="rounded-md border shadow-md" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
         </div>
         <div className={ipvis ? '' : 'hidden'}>
           <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
@@ -45,7 +45,7 @@ export default function InitUI(){
               className='max-w-sm'
               defaultValue={ipaddress}
             />
-          <Button onClick={handleClick} variant={"default"}>Connect</Button>
+          <Button className="ml-4 rounded-md border shadow-md" onClick={handleClick} variant={"default"}>Connect</Button>
         </div>
         </div>
         
@@ -63,12 +63,12 @@ export default function InitUI(){
     </div>
 
         <div className="flex justify-center p-5">
-      <div className="flex flex-col flex-wrap">
+      <div className="flex flex-col w-[60%] sm:w-[30%]">
         <ProgressDemo/>
         {/* <progress id="pr" max="100" value="77.68211229853571"></progress> */}
-        <p>
+        {/* <p>
           Seleted Storage has
-        </p>
+        </p> */}
       </div>
         </div>
     <div>

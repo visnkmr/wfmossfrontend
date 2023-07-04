@@ -158,8 +158,8 @@ export function DataTable<TData, TValue>({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 
-            // variant='outline' 
-            className='ml-auto'>
+          
+          className="rounded-md border shadow-md mb-4">
             Choose Columns
           </Button>
         </DropdownMenuTrigger>
