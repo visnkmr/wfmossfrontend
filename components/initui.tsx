@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function InitUI(){
   const inputRef = useRef(null);
-  const [ipvis,setipvis] = useState(false);
+  const [ipvis,setipvis] = useState(true);
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams()
 
@@ -33,7 +33,7 @@ export default function InitUI(){
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
         </div>
-        <div className={ipvis ? '' : 'hidden'}>
+        <div className={`rounded-md border shadow-md flex-wrap flex flex-col ${ipvis ? '' : 'hidden'}`}>
           <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
        
         <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
