@@ -48,6 +48,7 @@ export interface lofiles
       queryFn: async()=>{
         
         const response = await axios.get(ipaddress)
+        // return a
         // console.log(response.data)
           return response.data
       },
@@ -55,6 +56,7 @@ export interface lofiles
       // refetchOnMount:true,
       
       cacheTime:0,
+      
       staleTime:0,
       // refetchOnWindowFocus:false,
       
@@ -69,7 +71,7 @@ export interface lofiles
       //   data=[]
       // }
       console.log(data)
-      if(!data)
+      if(!data || isError)
         data=""
     
       //  await fetch('http://localhost:3000/api/payments' || 'https://demo-table-eight.vercel.app', {

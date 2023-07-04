@@ -9,14 +9,16 @@
         "openapi":"/delete.html?path=",
         "downloadapi":"/download/filename?path=",
         "filesize":0,
-        "lastmodified":"days ago"
+        "lastmodified":"days ago",
+        "isfile":false
     
       },{
         "filename":"filename2.extension",
         "openapi":"/delete.html?path=",
         "downloadapi":"/download/filename?path=",
         "filesize":0,
-        "lastmodified":"days ago"
+        "lastmodified":"days ago",
+        "isfile":true
     
       }]
     }
