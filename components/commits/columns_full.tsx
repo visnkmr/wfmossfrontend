@@ -87,7 +87,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
     cell: ({
       getValue,
       row: {
-        original: { openapi,filename,downloadapi },
+        original: { openapi,filename,downloadapi,isfile },
       },
     }) => {
       const rname = getValue()
@@ -96,7 +96,8 @@ export const columns_full: ColumnDef<lofiles>[] = [
         <div className='flex flex-col'>
 
           <a href={downloadapi}>{`${filename}`}</a>
-            <a href={openapi}>{`open on tv`}</a>
+          
+            <a href={openapi} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
         </div>
         // <div className="text-right">
         //   {original_price_incl_tax !== price && (

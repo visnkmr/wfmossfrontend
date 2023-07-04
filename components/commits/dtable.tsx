@@ -15,7 +15,7 @@ import {getData, lofiles} from "../listoffiles"
     ipaddress:string;
   }
   export default function Dtable({columns,ipaddress}:dtableprops) {
-    const data = getData(ipaddress);
+    const data = getData(ipaddress).filelist;
   
     return (
       
