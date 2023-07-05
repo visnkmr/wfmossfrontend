@@ -46,6 +46,31 @@ export default function InitUI(){
       // if(ft(ipaddress))
       // setuua(ft(ipaddress).percentsizefree)
     };
+    const handleUpload=(event:React.FormEvent)=> {
+      event.preventDefault();
+      
+      const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+      const file = fileInput.files![0];
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      fetch(`http://${ipaddress}/api/upload`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        console.log(response)
+        response.json()})
+      .then(data => {
+        // Handle the response from the server
+        console.log(data);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
+    }
     
     // React.useEffect(() => {
     //     setipaddress(ipad as string)
@@ -81,11 +106,11 @@ export default function InitUI(){
         <div className={`flex justify-center ${ufvis ? '' : 'hidden'}`}>
 
         <div className="flex justify-center p-5 rounded-md border shadow-md m-2 ">
-        <form method="post" action={`http://${ipaddress}/upload.html`} encType="multipart/form-data">
+        <form>
             <p className="mb-5 mt-5 flex justify-center">{"Select file and click Send"}</p>
           <div className="flex flex-row">
-            <Input type="file" name="upfile" id="fileinput" required={true}/>
-            <Input type="submit" value="Send" className=""/>
+            <Input type="file" name="upfile" id="fileInput" required={true}/>
+            <button type="submit" onClick={handleUpload}>Upload</button>
           </div>
         </form>
         </div>
