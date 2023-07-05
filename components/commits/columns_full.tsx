@@ -95,9 +95,10 @@ export const columns_full: ColumnDef<lofiles>[] = [
       return (
         <div className='flex flex-col'>
 
-          <a href={`downloadapi`}>{`${filename}`}</a>
+            <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
+            <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a>
+            <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
           
-            <a href={openapi} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
         </div>
         // <div className="text-right">
         //   {original_price_incl_tax !== price && (
