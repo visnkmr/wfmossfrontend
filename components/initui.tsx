@@ -40,7 +40,7 @@ export default function InitUI(){
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
   const [toastv,settoastv] = useState(true);
-  const [toast,settoast] = useState("Sample Text");
+  const [toast,settoast] = useState("Hope you enjoy your day today!");
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams();
 

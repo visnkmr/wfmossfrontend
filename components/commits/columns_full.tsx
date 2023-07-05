@@ -92,18 +92,51 @@ export const columns_full: ColumnDef<lofiles>[] = [
       },
     }) => {
       const rname = getValue()
-      const handleClick = () => {
+      const handleFolderClick = () => {
         console.log("clicked")
         setGlobalState("ipaddress",openapi)
         // if(ft(ipaddress))
         // setuua(ft(ipaddress).percentsizefree)
       };
+      const handleFileClick = () => {
+        console.log("clicked")
+        setGlobalState("ipaddress",downloadapi)
+        // if(ft(ipaddress))
+        // setuua(ft(ipaddress).percentsizefree)
+      };
+      const handleFileOODClick = () => {
+        fetch(openapi, {
+        method: 'POST',
+      })
+      .then(response => 
+        {
+          console.log(response);
+          return response.status
+        })
+      .then(data => {
+        // let what=data[0] as st
+        // Handle the response from the server
+        // console.log(what);
+        if(data===200){
+          console.log("opened file on device successfully.")
+        }
+        else {
+          console.log("failed")
+        }
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
+      };
       return (
         <div className='flex flex-col'>
 
-            <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
-            <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a>
-            <Button className={isfile ? 'hidden' : ''} onClick={handleClick}>{filename}</Button>
+            {/* <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a> */}
+            {/* <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a> */}
+            <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}>{filename}</Button>
+            {/* <Button className={isfile ? '' : 'hidden'} onClick={handleFileClick}>{filename}</Button> */}
+            <Button className={isfile ? '' : 'hidden'} onClick={handleFileOODClick}>{"open on tv"}</Button>
             <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
           
         </div>
