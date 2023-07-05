@@ -87,17 +87,17 @@ export const columns_full: ColumnDef<lofiles>[] = [
     cell: ({
       getValue,
       row: {
-        original: { openapi,filename,downloadapi,isfile },
+        original: { openapi,filename,downloadapi,isfile,ipaddress },
       },
     }) => {
       const rname = getValue()
 
       return (
         <div className='flex flex-col'>
-
-          <a href={`downloadapi`}>{`${filename}`}</a>
           
-            <a href={openapi} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
+            <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
+            <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a>
+            <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
         </div>
         // <div className="text-right">
         //   {original_price_incl_tax !== price && (
@@ -177,6 +177,8 @@ export const columns_full: ColumnDef<lofiles>[] = [
 
       )
     },
+    enableSorting: true,
+  //   enableHiding: false,
   },{
     accessorKey: 'time',
     header: ({ column }) => {
@@ -205,6 +207,8 @@ export const columns_full: ColumnDef<lofiles>[] = [
           <p>{lastmodified}</p>
       )
     },
+    enableSorting: true,
+  //   enableHiding: false,
   },
   
   // {

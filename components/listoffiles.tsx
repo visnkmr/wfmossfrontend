@@ -21,7 +21,8 @@ export interface lofiles
     downloadapi:string,
     filesize:number,
     lastmodified:string,
-    isfile:boolean
+    isfile:boolean,
+    ipaddress?:string
 
   };
   interface filelistprops {
@@ -37,7 +38,7 @@ export interface lofiles
     }
     else{
       // data =a;
-  ipaddress="http://10.0.0.95:55093/api/json/v1"
+  ipaddress=`http://${ipaddress}/api/json/v1`
         // ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
@@ -55,12 +56,12 @@ export interface lofiles
           return response.data
       },
       retry:false,
-      // refetchOnMount:true,
+      refetchOnMount:false,
       
       cacheTime:0,
       
       staleTime:0,
-      // refetchOnWindowFocus:false,
+      refetchOnWindowFocus:false,
       
       
     
@@ -73,8 +74,22 @@ export interface lofiles
       //   data=[]
       // }
       // console.log(data)
-      if(!data || isError)
-        data=""
+      // let retdata={} as returnedjson
+      // let modretdata={} as returnedjson
+      if(data && !isError)
+      {  
+        // retdata=data
+      // modretdata=data;
+      // modretdata.filelist = 
+      data.filelist.map((each:lofiles)=>{
+       each.ipaddress=ipaddress;
+        return each
+      })
+      // console.log(modretdata.filelist)
+    }
+    else{
+      data={}
+    }
     
       //  await fetch('http://localhost:3000/api/payments' || 'https://demo-table-eight.vercel.app', {
       //   method: 'GET',
