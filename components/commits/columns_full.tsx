@@ -202,7 +202,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
       const utcTime = utcDateTime.toFormat('dd MMM yy'); // Format UTC time in ddmmyyhhss format
 
       return (
-          <p>{utcTime}</p>
+          <p>{lastmodified}</p>
       )
     },
   },
