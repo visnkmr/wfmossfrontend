@@ -31,6 +31,10 @@ import Link from "next/link";
 //   })
 //   return data
 // }
+
+interface st{
+  status:string
+}
 export default function InitUI(){
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
@@ -59,12 +63,18 @@ export default function InitUI(){
         method: 'POST',
         body: formData
       })
-      .then(response => {
-        console.log(response)
-        response.json()})
+      .then(response => 
+        response.json())
       .then(data => {
+        let what=data[0] as st
         // Handle the response from the server
-        console.log(data);
+        console.log(what);
+        if(what.status==="success"){
+          console.log("succeeded")
+        }
+        else if (data.contains("success")){
+          console.log("succeeded 2")
+        }
       })
       .catch(error => {
         // Handle any errors
