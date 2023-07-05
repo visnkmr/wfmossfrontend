@@ -4,9 +4,9 @@ import { Globe,Upload,Bell } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
-import {useSearchParams} from 'next/navigation'
+import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation'
 import Link from "next/link";
-import {setGlobalState,getGlobalState, useGlobalState} from "../lib/GlobalStateContext"
+import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -42,20 +42,25 @@ export default function InitUI(){
   const [toastv,settoastv] = useState(true);
   const [toast,settoast] = useState("Sample Text");
   const [ufvis,setufvis] = useState(false);
-  const searchParams = useSearchParams()
-// let [uua,setuua]=useState("")
-    const [ipaddress, setipaddress] = useGlobalState("ipaddress");
-    useEffect(()=>{
+  const searchParams = useSearchParams();
 
-      setGlobalState("ipaddress",searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
-    },[])
+// let [uua,setuua]=useState("")
+    const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
+    
+    const [url, seturl] = useGlobalState("ipaddress");
+    // useEffect(()=>{
+
+    //   setGlobalState("ipaddress",);
+    // },[searchParams])
+
     // const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
       console.log("clicked")
-      settoast("uplaoded")
+      // settoast("uplaoded")
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
-      setipaddress(inputRef.current.value);
+      seturl(`http://${inputRef.current.value}/api/json/v1`);
+      setipaddress(`${inputRef.current.value}`);
       // if(ft(ipaddress))
       // setuua(ft(ipaddress).percentsizefree)
     };
@@ -116,7 +121,7 @@ export default function InitUI(){
         
         <div className={`flex justify-center ${ipvis ? '' : 'hidden'}`}>
         <div className={`rounded-md border shadow-md p-4 m-2 }`}>
-          <h2 className='flex justify-center'>Connected to: {ipaddress}</h2>
+          {/* <h2 className='flex justify-center'>Connected to: {ipaddress}</h2> */}
        
           <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>
           <div className="flex justify-center p-2">
@@ -167,7 +172,7 @@ export default function InitUI(){
         <tbody> */}
         <div>
 
-          {getlistoffilesfromapi(ipaddress)}
+          {getlistoffilesfromapi(url)}
         </div>
         {/* </tbody>
       </table> */}

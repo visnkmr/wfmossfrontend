@@ -31,13 +31,13 @@ export interface lofiles
     // let ipaddress=""
       // nextjs 13 fetching api from our api folder/payments
       if(ipaddress===""){
-      
-        ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
+        
+        // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
         // ipaddress=""
     }
     else{
       // data =a;
-  ipaddress=`http://${ipaddress}/api/json/v1`
+  ipaddress=`${ipaddress}`
         // ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)

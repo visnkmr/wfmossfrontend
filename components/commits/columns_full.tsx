@@ -18,6 +18,7 @@ import { DateTime } from 'luxon';
 import LetterClamp from '../../src/components/letterclamp';
 import '../../styles/committablestyle.css'
 import { lofiles } from '../listoffiles';
+import { setGlobalState } from '../../lib/GlobalStateContext';
 // export type eCommit = {
 //   reponame: string;
 //   additions: number;
@@ -91,12 +92,18 @@ export const columns_full: ColumnDef<lofiles>[] = [
       },
     }) => {
       const rname = getValue()
-
+      const handleClick = () => {
+        console.log("clicked")
+        setGlobalState("ipaddress",openapi)
+        // if(ft(ipaddress))
+        // setuua(ft(ipaddress).percentsizefree)
+      };
       return (
         <div className='flex flex-col'>
 
             <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
             <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a>
+            <Button className={isfile ? 'hidden' : ''} onClick={handleClick}>{filename}</Button>
             <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
           
         </div>
