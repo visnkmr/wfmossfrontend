@@ -37,7 +37,7 @@ export interface lofiles
     }
     else{
       // data =a;
-  ipaddress="http://10.0.0.95:55093/api/json/v1"
+  ipaddress=`http://${ipaddress}/api/json/v1`
         // ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
