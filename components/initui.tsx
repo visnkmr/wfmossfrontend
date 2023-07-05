@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Globe,Upload } from 'lucide-react';
+import { Globe,Upload,Bell } from 'lucide-react';
 import React, { useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
@@ -38,12 +38,15 @@ interface st{
 export default function InitUI(){
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
+  const [toastv,settoastv] = useState(true);
+  const [toast,settoast] = useState("Sample Text");
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams()
 // let [uua,setuua]=useState("")
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
       console.log("clicked")
+      settoast("uplaoded")
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
       setipaddress(inputRef.current.value);
@@ -64,16 +67,22 @@ export default function InitUI(){
         body: formData
       })
       .then(response => 
-        response.json())
+        {
+          console.log(response);
+          return response.status
+        })
       .then(data => {
-        let what=data[0] as st
+        // let what=data[0] as st
         // Handle the response from the server
-        console.log(what);
-        if(what.status==="success"){
-          console.log("succeeded")
+        // console.log(what);
+        if(data===200){
+          let message="succeeded to send "+file.name;
+          console.log(message)
+          settoast(message)
+          settoastv(true)
         }
-        else if (data.contains("success")){
-          console.log("succeeded 2")
+        else {
+          console.log("failed")
         }
       })
       .catch(error => {
@@ -90,6 +99,10 @@ export default function InitUI(){
     // }, []) // <-- empty array means 'run once'
     return(
         <>
+        <div className='flex justify-center m-2 '>
+        <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toast} <span className='ml-2' >x</span></Button>
+        
+        </div>
         <div className='flex justify-center'>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
