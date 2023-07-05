@@ -28,8 +28,9 @@ export interface lofiles
   interface filelistprops {
     ipaddress:string
   }
-  export function getData(ipaddress:string): returnedjson {
+  export function getData(conip:string): returnedjson {
     // let ipaddress=""
+    let ipaddress=conip;
       // nextjs 13 fetching api from our api folder/payments
       if(ipaddress===""){
       
@@ -82,7 +83,7 @@ export interface lofiles
       // modretdata=data;
       // modretdata.filelist = 
       data.filelist.map((each:lofiles)=>{
-       each.ipaddress=ipaddress;
+       each.ipaddress=conip;
         return each
       })
       // console.log(modretdata.filelist)
