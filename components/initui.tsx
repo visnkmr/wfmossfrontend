@@ -1,11 +1,12 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Globe,Upload,Bell } from 'lucide-react';
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
 import {useSearchParams} from 'next/navigation'
 import Link from "next/link";
+import {setGlobalState,getGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -43,7 +44,12 @@ export default function InitUI(){
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams()
 // let [uua,setuua]=useState("")
-    const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
+    const [ipaddress, setipaddress] = useGlobalState("ipaddress");
+    useEffect(()=>{
+
+      setGlobalState("ipaddress",searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
+    },[])
+    // const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
       console.log("clicked")
       settoast("uplaoded")

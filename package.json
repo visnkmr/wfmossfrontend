@@ -70,6 +70,7 @@
     "next-optimized-images": "3.0.0-canary.10",
     "next-pwa": "^5.6.0",
     "react-fast-marquee": "^1.6.0",
+    "react-hooks-global-state": "^2.1.0",
     "react-lazy-load-image-component": "^1.6.0"
   }
 }
