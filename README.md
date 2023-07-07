@@ -1,12 +1,12 @@
 # Tauri + NEXTJS + React+ Tailwind + Typescript
-
+  
 Build instructions:
-Clone repo
-cd repo
-pnpm i
-yarn next dev, yarn next build- to debug and build only nextjs website
-cargo tauri dev, cargo tauri build - to debug and build tauri app
-
+Clone repo  
+cd repo  
+pnpm i  
+yarn next dev, yarn next build- to debug and build only nextjs website  
+cargo tauri dev, cargo tauri build - to debug and build tauri app  
+  
 This template should help get you started developing with Tauri, React and Typescript in Vite.
 
 ## Recommended IDE Setup
