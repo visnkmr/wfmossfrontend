@@ -1,3 +1,5 @@
+You can find the latest releases @ [here](https://codeberg.org/visnk/wfmossfrontend/releases/latest)
+
 # Tauri + NEXTJS + React+ Tailwind + Typescript
   
 Build instructions:
