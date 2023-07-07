@@ -1,0 +1,29 @@
+[package]
+name = "wfm"
+version = "0.0.1"
+description = "Tauri wrapper for OSS frotend for WFM that was made using NextJS, React, Tailwind"
+authors = ["Vishnu N K"]
+license = "MIT"
+repository = "https://codeberg.org/visnk/wfmossfrontend-tauri.git"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"
+lto = true
+panic = "abort"
+
+[build-dependencies]
+tauri-build = { version = "1.2", features = [] }
+
+[dependencies]
+tauri = { version = "1.2", features = ["shell-open"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]

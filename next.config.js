@@ -188,7 +188,7 @@ const nextConfig =
   //   serverActions:true,
   // },
   reactStrictMode: true,
-  // output:"export",
+  output:"export",
 };
 
 // )
