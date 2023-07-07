@@ -43,10 +43,16 @@ export default function InitUI(){
   const [toast,settoast] = useState("Hope you enjoy your day today!");
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams();
-
 // let [uua,setuua]=useState("")
+
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
-    
+    setGlobalState("ipaddress",`http://${ipaddress}/api/json/v1`)
+    // console.log(ipaddress)
+    // React.useEffect(()=>{
+    //   let tempip=searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"";
+    //   seturl(`http://${tempip}/api/json/v1`);
+    //   setipaddress(`${tempip}`);
+    // },[searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:""])
     const [url, seturl] = useGlobalState("ipaddress");
     // useEffect(()=>{
 
