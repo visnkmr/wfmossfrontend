@@ -18,6 +18,7 @@ import { DateTime } from 'luxon';
 import LetterClamp from '../../src/components/letterclamp';
 import '../../styles/committablestyle.css'
 import { lofiles } from '../listoffiles';
+import { setGlobalState } from '../../lib/GlobalStateContext';
 // export type eCommit = {
 //   reponame: string;
 //   additions: number;
@@ -87,17 +88,57 @@ export const columns_full: ColumnDef<lofiles>[] = [
     cell: ({
       getValue,
       row: {
-        original: { openapi,filename,downloadapi,isfile,ipaddress },
+        original: { openapi,filename,downloadapi,isfile },
       },
     }) => {
       const rname = getValue()
-
+      const handleFolderClick = () => {
+        console.log("clicked")
+        setGlobalState("ipaddress",openapi)
+        // if(ft(ipaddress))
+        // setuua(ft(ipaddress).percentsizefree)
+      };
+      const handleFileClick = () => {
+        console.log("clicked")
+        setGlobalState("ipaddress",downloadapi)
+        // if(ft(ipaddress))
+        // setuua(ft(ipaddress).percentsizefree)
+      };
+      const handleFileOODClick = () => {
+        fetch(openapi, {
+        method: 'POST',
+      })
+      .then(response => 
+        {
+          console.log(response);
+          return response.status
+        })
+      .then(data => {
+        // let what=data[0] as st
+        // Handle the response from the server
+        // console.log(what);
+        if(data===200){
+          console.log("opened file on device successfully.")
+        }
+        else {
+          console.log("failed")
+        }
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
+      };
       return (
         <div className='flex flex-col'>
+
+            {/* <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a> */}
+            {/* <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a> */}
+            <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}>{filename}</Button>
+            {/* <Button className={isfile ? '' : 'hidden'} onClick={handleFileClick}>{filename}</Button> */}
+            <Button className={isfile ? '' : 'hidden'} onClick={handleFileOODClick}>{"open on tv"}</Button>
+            <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
           
-            <a href={`http://${ipaddress}${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a>
-            <a href={`http://${ipaddress}${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a>
-            <a href={`http://${ipaddress}${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
         </div>
         // <div className="text-right">
         //   {original_price_incl_tax !== price && (
@@ -177,8 +218,6 @@ export const columns_full: ColumnDef<lofiles>[] = [
 
       )
     },
-    enableSorting: true,
-  //   enableHiding: false,
   },{
     accessorKey: 'time',
     header: ({ column }) => {
@@ -207,8 +246,6 @@ export const columns_full: ColumnDef<lofiles>[] = [
           <p>{lastmodified}</p>
       )
     },
-    enableSorting: true,
-  //   enableHiding: false,
   },
   
   // {

@@ -21,25 +21,23 @@ export interface lofiles
     downloadapi:string,
     filesize:number,
     lastmodified:string,
-    isfile:boolean,
-    ipaddress?:string
+    isfile:boolean
 
   };
   interface filelistprops {
     ipaddress:string
   }
-  export function getData(conip:string): returnedjson {
+  export function getData(ipaddress:string): returnedjson {
     // let ipaddress=""
-    let ipaddress=conip;
       // nextjs 13 fetching api from our api folder/payments
       if(ipaddress===""){
-      
-        ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
+        
+        // ipaddress="https://cdn.jsdelivr.net/gh/visnkmr/wfmossfrontend@main/exampleapisresponses/samplefileapi.json"
         // ipaddress=""
     }
     else{
       // data =a;
-  ipaddress=`http://${ipaddress}/api/json/v1`
+  ipaddress=`${ipaddress}`
         // ipaddress=`http://${ipaddress}/samplefileapi.json`
     }
     console.log(ipaddress)
@@ -57,12 +55,12 @@ export interface lofiles
           return response.data
       },
       retry:false,
-      refetchOnMount:false,
+      // refetchOnMount:true,
       
       cacheTime:0,
       
       staleTime:0,
-      refetchOnWindowFocus:false,
+      // refetchOnWindowFocus:false,
       
       
     
@@ -75,22 +73,8 @@ export interface lofiles
       //   data=[]
       // }
       // console.log(data)
-      // let retdata={} as returnedjson
-      // let modretdata={} as returnedjson
-      if(data && !isError)
-      {  
-        // retdata=data
-      // modretdata=data;
-      // modretdata.filelist = 
-      data.filelist.map((each:lofiles)=>{
-       each.ipaddress=conip;
-        return each
-      })
-      // console.log(modretdata.filelist)
-    }
-    else{
-      data={}
-    }
+      if(!data || isError)
+        data=""
     
       //  await fetch('http://localhost:3000/api/payments' || 'https://demo-table-eight.vercel.app', {
       //   method: 'GET',

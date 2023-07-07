@@ -59,7 +59,6 @@
     "tailwindcss": "^3.3.2",
     "terser-webpack-plugin": "^5.3.9",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9",
     "@tauri-apps/cli": "^1.2.2"
   },
   "sideEffects": false,
@@ -71,6 +70,7 @@
     "next-optimized-images": "3.0.0-canary.10",
     "next-pwa": "^5.6.0",
     "react-fast-marquee": "^1.6.0",
+    "react-hooks-global-state": "^2.1.0",
     "react-lazy-load-image-component": "^1.6.0",
     "@tauri-apps/api": "^1.2.0"
   }
