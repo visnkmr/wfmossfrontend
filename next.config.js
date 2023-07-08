@@ -187,7 +187,7 @@ const nextConfig =
   // experimental:{
   //   serverActions:true,
   // },
-  reactStrictMode: true,
+  // reactStrictMode: true,
   output:"export",
 };
 

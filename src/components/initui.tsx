@@ -7,6 +7,9 @@ import { getData, getlistoffilesfromapi, returnedjson } from '../components/list
 import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation'
 import Link from "next/link";
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
+// import {ToastNotification} from "toast-notification-js"
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -37,17 +40,28 @@ interface st{
   status:string
 }
 export default function InitUI(){
+  
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
-  const [toastv,settoastv] = useState(true);
-  const [toast,settoast] = useState("Hope you enjoy your day today!");
+  // const [toastv,settoastv] = useState(true);
+  const [toastcontent] = useGlobalState("toast");
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams();
-
+  // var toastNotification = ToastNotification();
 // let [uua,setuua]=useState("")
-    const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     
-    const [url, seturl] = useGlobalState("ipaddress");
+    const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
+    const [url] = useGlobalState("ipaddress");
+    toast(toastcontent, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     // useEffect(()=>{
 
     //   setGlobalState("ipaddress",);
@@ -55,11 +69,32 @@ export default function InitUI(){
 
     // const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     const handleClick = () => {
-      console.log("clicked")
-      // settoast("uplaoded")
+      // console.log("clicked")
+      
+      // toastNotification.create({
+      //   // redirect: 
+      //   // {
+      //   // url: 'http',
+      //   // newWindow: 'true',
+      //   // },
+      //   progressBar: 
+      //   {
+      //   show: 'false',
+      //   },
+      //   position: 
+      //   {
+      //   y: 'bottom',
+      //   x: 'right',
+      //   },
+      //   icon:  '🍞',
+      //   message:  'try',
+      //   title:  'sdad',
+      //   closeButton:  'true',
+      //   });
+      setGlobalState("toast","uplaoded")
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
-      seturl(`http://${inputRef.current.value}/api/json/v1`);
+      setGlobalState("ipaddress",`http://${inputRef.current.value}/api/json/v1`);
       setipaddress(`${inputRef.current.value}`);
       // if(ft(ipaddress))
       // setuua(ft(ipaddress).percentsizefree)
@@ -89,8 +124,8 @@ export default function InitUI(){
         if(data===200){
           let message="succeeded to send "+file.name;
           console.log(message)
-          settoast(message)
-          settoastv(true)
+          setGlobalState("toast",message)
+          // settoastv(true)
         }
         else {
           console.log("failed")
@@ -110,10 +145,11 @@ export default function InitUI(){
     // }, []) // <-- empty array means 'run once'
     return(
         <>
-        <div className='flex justify-center m-2 '>
-        <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toast} <span className='ml-2' >x</span></Button>
+        <ToastContainer />
+        {/* <div className='flex justify-center m-2 '>
+        <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toastcontent} <span className='ml-2' >x</span></Button>
         
-        </div>
+        </div> */}
         <div className='flex justify-center'>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md  mr-3" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
