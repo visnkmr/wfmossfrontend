@@ -12,6 +12,7 @@ import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
   import 'react-toastify/dist/ReactToastify.css';
 import { ProgressDemo } from './progressbar';
 import { UploadButton } from "react-uploader";
+import axios from "axios"
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -176,15 +177,32 @@ export default function InitUI(){
       // // xhr.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
       // // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
       // xhr.send(file);
-      fetch(`http://${ipaddress}/api/upload`, {
-        method: 'POST',
-        body: formData
+      axios.request({
+        method: "post",
+        url: `http://${ipaddress}/api/upload`,
+        data: formData,
+        // onUploadProgress: (progressEvent) => {
+        //   progressEvent.total
+        //   const percentCompleted = Math.round(
+        //     (progressEvent.loaded * 100) / progressEvent.total!
+        //   );
+        //   console.log(percentCompleted);
+        //   // Update your progress UI here
+        // },
       })
+      // .then((response) => {
+      //   console.log(response.data);
+      //   // Handle the response here
+      // });
+      // fetch(`http://${ipaddress}/api/upload`, {
+      //   method: 'POST',
+      //   body: formData
+      // })
       .then(response => 
         {
           // console.log(response.json());
           
-          return response.json()
+          return response.data
         })
       .then(data => {
         console.log(data)
