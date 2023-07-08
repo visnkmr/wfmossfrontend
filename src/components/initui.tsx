@@ -7,10 +7,10 @@ import { getData, getlistoffilesfromapi, returnedjson } from '../components/list
 import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation'
 import Link from "next/link";
 import { Button } from './ui/button';
-
+import toast, { Toaster } from 'react-hot-toast';
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 // import {ToastNotification} from "toast-notification-js"
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import { ProgressDemo } from './progressbar';
 // let ft = (ipaddress:string):returnedjson=>{
@@ -89,14 +89,16 @@ export default function InitUI(){
       }
       setGlobalState("toast-visible",false)
     toast(toastcontent, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      position: "top-center",
+      duration:3000,
+
+      // autoClose: 3000,
+      // hideProgressBar: true,
+      // closeOnClick: true,
+      // pauseOnHover: true,
+      // draggable: true,
+      // progress: undefined,
+      // theme: "light",
       });
     }
     // useEffect(()=>{
@@ -185,7 +187,7 @@ export default function InitUI(){
     // }, []) // <-- empty array means 'run once'
     return(
         <>
-        <ToastContainer />
+        <Toaster />
         {/* <div className='flex justify-center m-2 '>
         <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toastcontent} <span className='ml-2' >x</span></Button>
         
