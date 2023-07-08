@@ -223,7 +223,7 @@ export default function InitUI(){
             <p className="mb-5 mt-5 flex justify-center">{"Select file and click Send"}</p>
           <div className="flex flex-row">
             <Input type="file" name="upfile" id="fileInput" required={true}/>
-            <button type="submit" onClick={handleUpload}>Upload</button>
+            <Button className="ml-4 rounded-md border shadow-md" type="submit" onClick={handleUpload}>Upload</Button>
           </div>
         </form>
         </div>
