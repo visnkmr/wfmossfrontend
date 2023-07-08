@@ -44,13 +44,13 @@ interface st{
 }
 export default function InitUI(){
   let firstime=useRef(true)
-  let ft=useRef(true)
+  // let ft=useRef(true)
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
   const [toastv] = useGlobalState("toast-visible");
   const [toastcontent] = useGlobalState("toast");
   const [ufvis,setufvis] = useState(false);
-  const [helpvis,sethvis] = useState(false);
+  // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
   const [url] = useGlobalState("ipaddress");
 
