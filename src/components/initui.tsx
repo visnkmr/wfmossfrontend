@@ -49,7 +49,7 @@ export default function InitUI(){
   const [ipvis,setipvis] = useState(true);
   const [toastv] = useGlobalState("toast-visible");
   const [toastcontent] = useGlobalState("toast");
-  const [ufvis,setufvis] = useState(false);
+  const [ufvis,setufvis] = useState(true);
   // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
   const [url] = useGlobalState("ipaddress");
@@ -153,24 +153,30 @@ export default function InitUI(){
       })
       .then(response => 
         {
-          console.log(response);
+          // console.log(response.json());
           
-          return response.status
+          return response.json()
         })
       .then(data => {
+        console.log(data)
+        if(data){
         // let what=data[0] as st
         // Handle the response from the server
         // console.log(what);
-        if(data===200){
+        // if(data===200){
           setGlobalState("toast-visible",true)
         // setGlobalState("toast","uploaded file "+file.name)
-          let message="succeeded to send "+file.name;
+          let message="succeeded to send "+file.name+" to "+data.savedat;
           console.log(message)
           setGlobalState("toast",message)
           // settoastv(true)
+        // }
+        // else {
+        //   console.log("failed")
+        // }
         }
-        else {
-          console.log("failed")
+        else{
+          setGlobalState("toast","Upload failed")
         }
       })
       .catch(error => {
