@@ -95,6 +95,8 @@ export const columns_full: ColumnDef<lofiles>[] = [
       const handleFolderClick = () => {
         console.log("clicked")
         setGlobalState("ipaddress",openapi)
+        setGlobalState("toast-visible",true)
+        setGlobalState("toast","opening folder "+filename)
         // if(ft(ipaddress))
         // setuua(ft(ipaddress).percentsizefree)
       };
@@ -111,6 +113,8 @@ export const columns_full: ColumnDef<lofiles>[] = [
       .then(response => 
         {
           console.log(response);
+          setGlobalState("toast-visible",true)
+          setGlobalState("toast","opening "+filename+" on device ")
           return response.status
         })
       .then(data => {

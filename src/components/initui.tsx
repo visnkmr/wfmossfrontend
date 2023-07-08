@@ -40,18 +40,40 @@ interface st{
   status:string
 }
 export default function InitUI(){
-  
+  let firstime=useRef(false)
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
-  // const [toastv,settoastv] = useState(true);
+  const [toastv] = useGlobalState("toast-visible");
   const [toastcontent] = useGlobalState("toast");
   const [ufvis,setufvis] = useState(false);
   const searchParams = useSearchParams();
+  const [url] = useGlobalState("ipaddress");
+
   // var toastNotification = ToastNotification();
 // let [uua,setuua]=useState("")
     
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
-    const [url] = useGlobalState("ipaddress");
+
+    // if(url===""&&ipaddress)
+    // // if(ipaddress && searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"")
+    // {
+    //   let sp=searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"";
+    //   if(ipaddress===""&&sp)
+    //     setGlobalState("ipaddress",`http://${sp}/api/json/v1`)
+    // }
+    // if(ipaddress.toString().indexOf("http")===0 && ipaddress!==""){
+    //   if(firstime.current){
+    //     setGlobalState("ipaddress",`http://${inputRef.current.value}/api/json/v1`)
+    //     firstime.current=false
+    //   }
+    // }
+    console.log("ip--->"+ipaddress)
+    if(
+      (!url.includes("http") &&toastv) ||
+      toastv
+    )
+    {
+      setGlobalState("toast-visible",false)
     toast(toastcontent, {
       position: "top-right",
       autoClose: 3000,
@@ -62,6 +84,7 @@ export default function InitUI(){
       progress: undefined,
       theme: "light",
       });
+    }
     // useEffect(()=>{
 
     //   setGlobalState("ipaddress",);
@@ -91,7 +114,7 @@ export default function InitUI(){
       //   title:  'sdad',
       //   closeButton:  'true',
       //   });
-      setGlobalState("toast","uplaoded")
+      // setGlobalState("toast","connecting to "+inputRef.current.value)
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
       setGlobalState("ipaddress",`http://${inputRef.current.value}/api/json/v1`);
