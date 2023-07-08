@@ -1,7 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown,Folder,File,Tv,Download } from 'lucide-react';
 
 import { Button } from '../../components/ui/button';
 // import { Checkbox } from '../../components/ui/checkbox';
@@ -138,10 +138,13 @@ export const columns_full: ColumnDef<lofiles>[] = [
 
             {/* <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a> */}
             {/* <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a> */}
-            <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}>{filename}</Button>
+            <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}><Folder className='mr-2 h-4 w-4'/>{filename}</Button>
             {/* <Button className={isfile ? '' : 'hidden'} onClick={handleFileClick}>{filename}</Button> */}
-            <Button className={isfile ? '' : 'hidden'} onClick={handleFileOODClick}>{"open on tv"}</Button>
-            <a href={`${downloadapi}`} className={isfile ? '' : 'hidden'}>{filename}</a>
+            <div className={isfile ? '' : 'hidden'}>
+
+              <a href={`${downloadapi}`} className='flex justify-center'><File className='mr-2 h-4 w-4'/>{filename}<Download className='ml-2 h-4 w-4'/></a>
+            <Button className='rounded-md border shadow-md' onClick={handleFileOODClick}><Tv className='mr-2 h-4 w-4'/>{"open on tv"}</Button>
+            </div>
           
         </div>
         // <div className="text-right">
