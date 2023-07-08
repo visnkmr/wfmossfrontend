@@ -5,7 +5,7 @@ export default function Footer() {
     return (
       <>
         <footer className="bg-slate-800 dark:bg-blue-500 text-white" >
-           {/*<div className="pt-9 sm:grid sm:grid-cols-3 justify-center items-center text-center m-5">
+           <div className="pt-9 sm:grid sm:grid-cols-3 justify-center items-center text-center m-5">
             <div className="flex flex-col space-y-2">
               <div>
                   <a
@@ -76,7 +76,7 @@ export default function Footer() {
                   <a aria-aria-label="appchoose" href="https://appchoose.blogspot.com">AppChoose</a>
                 </div>
             </div>
-          </div> */}
+          </div>
           <div className="p-10 ">
             <div className="">
               <span>

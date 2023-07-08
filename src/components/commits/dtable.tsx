@@ -8,6 +8,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { useQuery } from '@tanstack/react-query';
 import a from "../../exampleapisresponses/samplefileapi.json"
 import {getData, lofiles} from "../listoffiles"
+import { useGlobalState } from '../../lib/GlobalStateContext';
 
 
   interface dtableprops{
@@ -23,11 +24,12 @@ import {getData, lofiles} from "../listoffiles"
       data=[]
       dontshow=true
     }
+    let [ipad]=useGlobalState("ipaddress")
   
     return (
       <div>
 
-        <h1 className={dontshow ? '' : 'hidden'}>{"Click on connect button to get started."}</h1>
+        <h1 className={dontshow ? '' : 'hidden'}>{`${(ipad==="")?"Type the IP address and ":""}Click on connect button to get started.`}</h1>
       <div className={dontshow ? 'hidden' : ''}>
         <DataTable columns={columns} data={data} />
       </div>

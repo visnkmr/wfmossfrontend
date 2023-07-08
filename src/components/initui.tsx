@@ -41,6 +41,7 @@ interface st{
 }
 export default function InitUI(){
   let firstime=useRef(true)
+  let ft=useRef(true)
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
   const [toastv] = useGlobalState("toast-visible");
@@ -54,7 +55,12 @@ export default function InitUI(){
 // let [uua,setuua]=useState("")
     
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
-
+    // if(ipaddress &&(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"")!=="" && ft.current){
+    //   console.log("rhere")
+    //   console.log("ipaddress"+ipaddress)
+    //   // setGlobalState("ipaddress",`http://${ipaddress}/api/json/v1`)
+    //   ft.current=false
+    // }
     // if(url===""&&ipaddress)
     // // if(ipaddress && searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"")
     // {

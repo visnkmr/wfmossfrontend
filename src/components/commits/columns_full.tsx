@@ -134,17 +134,16 @@ export const columns_full: ColumnDef<lofiles>[] = [
       });
       };
       return (
-        <div className='flex flex-col'>
+        <div className='flex justify-left'>
 
             {/* <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a> */}
             {/* <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a> */}
             <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}><Folder className='mr-2 h-4 w-4'/>{filename}</Button>
+            <a  href={`${downloadapi}`} className={`flex items-center p-2 rounded-md border shadow-md ${isfile ? 'hidden' : ''}`}><Download className='mr-2 h-4 w-4'/>Download folder as zip</a>
             {/* <Button className={isfile ? '' : 'hidden'} onClick={handleFileClick}>{filename}</Button> */}
-            <div className={isfile ? '' : 'hidden'}>
 
-              <a href={`${downloadapi}`} className='flex justify-center'><File className='mr-2 h-4 w-4'/>{filename}<Download className='ml-2 h-4 w-4'/></a>
-            <Button className='rounded-md border shadow-md' onClick={handleFileOODClick}><Tv className='mr-2 h-4 w-4'/>{"open on tv"}</Button>
-            </div>
+              <a  href={`${downloadapi}`} className={`mr-4 flex items-center ${isfile ? '' : 'hidden'}`}><File className='mr-2 h-4 w-4'/>{filename}<Download className='ml-2 h-4 w-4'/></a>
+            <Button className={`rounded-md border shadow-md ${isfile ? '' : 'hidden'}`} onClick={handleFileOODClick}><Tv className='mr-2 h-4 w-4'/>{"open on tv"}</Button>
           
         </div>
         // <div className="text-right">
@@ -219,11 +218,17 @@ export const columns_full: ColumnDef<lofiles>[] = [
       },
     }) => {
       const rname = getValue()
-
+      if(filesize!=0)
       return (
+        
         <p>{filesize}</p>
 
       )
+      else
+      return(
+        <>
+        </>
+      );
     },
   },{
     accessorKey: 'time',
@@ -249,9 +254,17 @@ export const columns_full: ColumnDef<lofiles>[] = [
       const utcDateTime = dateTime.toUTC(); // Convert DateTime object to UTC time
       const utcTime = utcDateTime.toFormat('dd MMM yy'); // Format UTC time in ddmmyyhhss format
 
+      if(lastmodified!=="0")
       return (
-          <p>{lastmodified}</p>
+        
+        <p>{lastmodified}</p>
+
       )
+      else
+      return(
+        <>
+        </>
+      );
     },
   },
   
