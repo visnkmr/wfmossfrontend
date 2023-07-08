@@ -9,10 +9,9 @@ import Link from "next/link";
 import { Button } from './ui/button';
 import toast, { Toaster } from 'react-hot-toast';
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
-// import {ToastNotification} from "toast-notification-js"
-// import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import { ProgressDemo } from './progressbar';
+import { UploadButton } from "react-uploader";
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -101,6 +100,7 @@ export default function InitUI(){
       // theme: "light",
       });
     }
+    
     // useEffect(()=>{
 
     //   setGlobalState("ipaddress",);
@@ -146,7 +146,36 @@ export default function InitUI(){
       
       const formData = new FormData();
       formData.append('file', file);
-      
+      // var xhr = new XMLHttpRequest();
+
+      // // Progress event listener
+      // xhr.upload.addEventListener("progress", function(event) {
+      //   if (event.lengthComputable) {
+      //     var percentComplete = (event.loaded / event.total) * 100;
+      //     console.log("Upload progress: " + percentComplete.toFixed(2) + "%");
+      //   }
+      // });
+    
+      // // Upload completed event listener
+      // xhr.addEventListener("load", function() {
+      //   console.log("Upload completed");
+      // });
+    
+      // // Upload failed event listener
+      // xhr.addEventListener("error", function() {
+      //   console.error("Upload failed");
+      // });
+    
+      // // Set up the request
+
+      // // Set the Content-Type header
+      // xhr.open("POST", `http://${ipaddress}/api/upload`);
+      // xhr.setRequestHeader("Content-Type", "multipart/form-data");
+      // // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type");
+      // // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+      // // xhr.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+      // // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+      // xhr.send(file);
       fetch(`http://${ipaddress}/api/upload`, {
         method: 'POST',
         body: formData
