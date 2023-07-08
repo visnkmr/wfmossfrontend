@@ -6,10 +6,13 @@ import { Input } from '../components/ui/input';
 import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
 import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation'
 import Link from "next/link";
+import { Button } from './ui/button';
+
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 // import {ToastNotification} from "toast-notification-js"
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import { ProgressDemo } from './progressbar';
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -226,7 +229,8 @@ export default function InitUI(){
 
         <div className="flex justify-center p-5">
       <div className="flex flex-col w-[60%] sm:w-[30%]">
-        <ProgressDemo/>
+        
+        {/* <ProgressDemo a={ipaddress}/> */}
         {/* <progress id="pr" max="100" value="77.68211229853571"></progress> */}
         {/* <p>
           Seleted Storage has
@@ -256,18 +260,4 @@ export default function InitUI(){
         );
 }
 
-import { Progress } from "../components/ui/progress"
-import { Button } from './ui/button';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
-export function ProgressDemo() {
-  const [progress, setProgress] = React.useState(13)
- 
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500)
-    return () => clearTimeout(timer)
-  }, [])
- 
-  return <Progress value={progress} className="w-full" />
-}

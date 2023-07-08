@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import a from "../../exampleapisresponses/samplefileapi.json"
 import {getData, lofiles} from "../listoffiles"
 import { useGlobalState } from '../../lib/GlobalStateContext';
+import { ProgressDemo } from '../progressbar';
 
 
   interface dtableprops{
@@ -18,6 +19,9 @@ import { useGlobalState } from '../../lib/GlobalStateContext';
   }
   export default function Dtable({columns,ipaddress}:dtableprops) {
     let data = getData(ipaddress).filelist;
+    let fsz = getData(ipaddress).freesize;
+    let percinuse=100-(getData(ipaddress).storageinuse/getData(ipaddress).totalstorage*100);
+
     let dontshow=false;
     if(!Array.isArray(data) || ! data ){
       console.log("error or not array")
@@ -28,7 +32,10 @@ import { useGlobalState } from '../../lib/GlobalStateContext';
   
     return (
       <div>
-
+        <p className='flex justify-center'>{fsz}</p>
+        {/* <p>{percinuse}</p> */}
+        
+        <ProgressDemo p={Math.ceil(percinuse)}/>
         <h1 className={dontshow ? '' : 'hidden'}>{`${(ipad==="")?"Type the IP address and ":""}Click on connect button to get started.`}</h1>
       <div className={dontshow ? 'hidden' : ''}>
         <DataTable columns={columns} data={data} />

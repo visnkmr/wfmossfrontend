@@ -139,11 +139,14 @@ export const columns_full: ColumnDef<lofiles>[] = [
             {/* <a href={`${openapi}`} className={isfile ? '' : 'hidden'}>{`open on tv`}</a> */}
             {/* <a href={`${openapi}`} className={isfile ? 'hidden' : ''}>{filename}</a> */}
             <Button className={isfile ? 'hidden' : ''} onClick={handleFolderClick}><Folder className='mr-2 h-4 w-4'/>{filename}</Button>
-            <a  href={`${downloadapi}`} className={`flex items-center p-2 rounded-md border shadow-md ${isfile ? 'hidden' : ''}`}><Download className='mr-2 h-4 w-4'/>Download folder as zip</a>
+            <a  href={`${downloadapi}`} className={`flex items-center p-2 rounded-md border shadow-md ${isfile ? 'hidden' : ''}`}><Download className='mr-2 h-4 w-4'/>zip</a>
             {/* <Button className={isfile ? '' : 'hidden'} onClick={handleFileClick}>{filename}</Button> */}
 
               <a  href={`${downloadapi}`} className={`mr-4 flex items-center ${isfile ? '' : 'hidden'}`}><File className='mr-2 h-4 w-4'/>{filename}<Download className='ml-2 h-4 w-4'/></a>
-            <Button className={`rounded-md border shadow-md ${isfile ? '' : 'hidden'}`} onClick={handleFileOODClick}><Tv className='mr-2 h-4 w-4'/>{"open on tv"}</Button>
+            <Button className={`rounded-md border shadow-md ${isfile ? '' : 'hidden'}`} onClick={handleFileOODClick}>
+              {"open on "}
+              <Tv className='ml-2 h-4 w-4'/>
+              </Button>
           
         </div>
         // <div className="text-right">

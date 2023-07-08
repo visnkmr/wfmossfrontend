@@ -7,6 +7,6 @@ const initialState = {
     "search":""
 
 };
-const { setGlobalState,useGlobalState } = createGlobalState(initialState);
+const { setGlobalState,useGlobalState,getGlobalState } = createGlobalState(initialState);
 
-export {useGlobalState,setGlobalState}
+export {useGlobalState,setGlobalState,getGlobalState}
