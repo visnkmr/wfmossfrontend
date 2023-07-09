@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
     return (
       <>
-        <footer className="bg-slate-800 dark:bg-blue-500 text-white" >
+        <footer className="mt-auto bg-slate-800 dark:bg-blue-500 text-white" >
            <div className="pt-9 sm:grid sm:grid-cols-3 justify-center items-center text-center m-5">
             <div className="flex flex-col space-y-2">
               <div>

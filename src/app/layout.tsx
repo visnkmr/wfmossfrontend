@@ -23,18 +23,18 @@ export default function RootLayout({
 
   // const [showon, setshow] = useLocalStorage("dark",true);
   return (
-    <html suppressHydrationWarning className="" lang="en">
-      <body className="dark:bg-gray-900">
+    <html suppressHydrationWarning className="h-full" lang="en">
+      <body className="h-full flex flex-col dark:bg-gray-900">
         <Providers>
 
         {/* <Thedarkhtml> */}
         {/* <Topthread/> */}
         <DarkButton/>
         {children}
-        <Footer/>
         {/* </Thedarkhtml> */}
         </Providers>
 
+        <Footer/>
       </body>
 
     </html>
