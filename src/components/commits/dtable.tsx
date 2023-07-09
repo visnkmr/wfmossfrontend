@@ -10,7 +10,7 @@ import a from "../../exampleapisresponses/samplefileapi.json"
 import {getData, lofiles} from "../listoffiles"
 import { useGlobalState } from '../../lib/GlobalStateContext';
 import { ProgressDemo } from '../progressbar';
-
+import Balancer from 'react-wrap-balancer'
 
   interface dtableprops{
     columns:ColumnDef<lofiles>[];
@@ -36,7 +36,9 @@ import { ProgressDemo } from '../progressbar';
         {/* <p>{percinuse}</p> */}
         
         <ProgressDemo p={Math.ceil(percinuse)}/>
-        <h1 className={dontshow ? '' : 'hidden'}>{`${(ipad==="")?"":""}Click on connect button to list the files or use the upload button after selecting the file to upload it.`}</h1>
+        <Balancer>
+          <h1 className={`text-center p-10 ${dontshow ? '' : 'hidden'}`}>{`${(ipad==="")?"":""}Click on connect button to list the files or use the upload button after selecting the file to upload it.`}</h1>
+          </Balancer>
       <div className={dontshow ? 'hidden' : ''}>
         <DataTable columns={columns} data={data} />
       </div>

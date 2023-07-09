@@ -13,6 +13,8 @@ import '../styles/globals.css'
 // // import Ct from "../src/components/ct";
 // const Ct =dynamic(()=>import ("../src/components/ct"));
 import InitUI from "../components/initui"
+import Link from 'next/link';
+import {Home} from "lucide-react"
 // const Commits =dynamic(()=>import ("../src/components/commits"));
 // import Commits from "../src/components/commits";
 // import Topthread from "../src/components/topthread";
@@ -68,6 +70,10 @@ export default function Page() {
           <Ct/>
           <Commits/>
           <Contactme/> */}
+          <div className='flex justify-center'>
+
+          <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md mr-3" href={`http://visnkmr.github.io`}><Home className='mr-2 h-4 w-4' />Vishnu N K</Link>
+          </div>
           <p className="text-center flex justify-center italic p-10">This page was made using NextJS, React and Tailwind.</p>
       </div>
 

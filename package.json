@@ -75,6 +75,7 @@
     "react-hot-toast": "^2.4.1",
     "react-lazy-load-image-component": "^1.6.0",
     "react-toastify": "^9.1.3",
+    "react-wrap-balancer": "^1.0.0",
     "toast-notification-js": "^1.0.3"
   }
 }
