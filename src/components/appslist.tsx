@@ -8,7 +8,7 @@ import axios from "axios"
 export function Appslist({url}:Applistprops){
     let al=getData(url).applist;
     return(<>
-    <div className="grid auto-cols-min w-full p-5 grid-cols-3 gap-5">
+    <div className="grid-flow-col w-full p-5 gap-5">
         
     { al&&al.map((each:appinfo,index:number) => {
 
