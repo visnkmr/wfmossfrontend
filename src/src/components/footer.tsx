@@ -5,10 +5,11 @@ export default function Footer() {
     return (
       <>
         <footer className="mt-auto bg-slate-800 dark:bg-blue-500 text-white" >
-           <div className="pt-9 sm:grid sm:grid-cols-3 justify-center items-center text-center m-5">
-            <div className="flex flex-col space-y-2">
-              <div>
+           <div className="pt-9 flex justify-center items-center text-center">
+            <div className="grid-flow-col gap-5">
+              
                   <a
+                  className="p-3"
                     aria-label="linkedin"
                     target="_blank"
                     rel="noreferrer"
@@ -17,9 +18,7 @@ export default function Footer() {
                   >
                     Linkedin
                   </a>
-                </div>
-                <div>
-                  <a
+                  <a className="p-3"
                     aria-label="github"
                     target="_blank"
                     rel="noreferrer"
@@ -28,9 +27,7 @@ export default function Footer() {
                   >
                     Github
                   </a>
-                </div>
-                <div>
-                  <a
+                  <a className="p-3"
                     aria-label="codeberg"
                     target="_blank"
                     rel="noreferrer"
@@ -39,13 +36,7 @@ export default function Footer() {
                   >
                     Codeberg
                   </a>
-                </div>
-                
-
-              </div>
-             <div className="flex flex-col space-y-2">
-            <div  >
-            <a
+            <a className="p-3"
                     aria-label="youtube"
                     target="_blank"
                     rel="noreferrer"
@@ -54,18 +45,15 @@ export default function Footer() {
                   >
                     Youtube
                   </a>
-                  </div>
-                <div  >
-                <a
+                <a className="p-3"
                   aria-label="telegram"
                   target="_blank"
                   rel="noreferrer"
                   href="https://vishnunkmr.t.me/"
                   >Telegram</a>
-                </div>
               </div> 
 
-            <div  className="flex flex-col space-y-2">
+            {/* <div  className="flex flex-col space-y-2">
               <div className="text-bold">
 
                 </div>
@@ -75,7 +63,7 @@ export default function Footer() {
                 <div>
                   <a aria-aria-label="appchoose" href="https://appchoose.blogspot.com">AppChoose</a>
                 </div>
-            </div>
+            </div> */}
           </div>
           <div className="p-10 ">
             <div className="">
