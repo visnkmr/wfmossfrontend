@@ -70,9 +70,9 @@ export default function Page() {
           <Ct/>
           <Commits/>
           <Contactme/> */}
-          <div className='flex justify-center'>
+          <div className='flex justify-center m-5'>
 
-          <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md mr-3" href={`http://visnkmr.github.io`}><Home className='mr-2 h-4 w-4' />Vishnu N K</Link>
+          <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" href={`http://visnkmr.github.io`}><Home className='mr-2 h-4 w-4' />Vishnu N K</Link>
           </div>
           <p className="text-center flex justify-center italic p-10">This page was made using NextJS, React and Tailwind.</p>
       </div>

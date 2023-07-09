@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import a from "../../exampleapisresponses/samplefileapi.json"
 import {getData} from "../listoffiles"
 import {lofiles,dtableprops} from "../../shared/types"
-import { useGlobalState } from '../../lib/GlobalStateContext';
+import { setGlobalState, useGlobalState } from '../../lib/GlobalStateContext';
 import { ProgressDemo } from '../progressbar';
 import Balancer from 'react-wrap-balancer'
 
@@ -20,9 +20,11 @@ import Balancer from 'react-wrap-balancer'
     let percinuse=100-(getData(ipaddress).storageinuse/getData(ipaddress).totalstorage*100);
 
     let dontshow=false;
+    // let dontshow=useGlobalState("table-visible");
     if(!Array.isArray(data) || ! data ){
       console.log("error or not array")
       data=[]
+      // setGlobalState("table-visible",true)
       dontshow=true
     }
     let [ipad]=useGlobalState("ipaddress")

@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Globe,Upload,Bell,HelpCircle,History } from 'lucide-react';
+import { Globe,Upload,Bell,HelpCircle,History,Grid,HardDrive } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { returnedjson } from '../shared/types';
@@ -48,8 +48,10 @@ export default function InitUI(){
   const inputRef = useRef(null);
   const [ipvis,setipvis] = useState(true);
   const [toastv] = useGlobalState("toast-visible");
+  const [tablev] = useGlobalState("table-visible");
   const [toastcontent] = useGlobalState("toast");
   const [ufvis,setufvis] = useState(true);
+  const [salvis,setsalvis] = useState(false);
   // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
   const [url] = useGlobalState("ipaddress");
@@ -248,6 +250,16 @@ export default function InitUI(){
         </div> */}
         <div className='flex justify-center'>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
+          <Button className="rounded-md border shadow-md mr-3" onClick={()=>{
+            setsalvis(true);
+            setGlobalState("table-visible",false);
+
+            }}><Grid className='mr-2 h-4 w-4' />Apps</Button>
+          <Button className="rounded-md border shadow-md mr-3" onClick={()=>{
+            setsalvis(false);
+            setGlobalState("table-visible",true);
+
+            }}><HardDrive className='mr-2 h-4 w-4' />Files</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md mr-3" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
           <Link className={`${showoldv?"":"hidden " }inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md mr-3`} href={`http://${ipaddress}/old`}><History className='mr-2 h-4 w-4' />Old version</Link>
           <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" target="_blank" href='http://github.com/visnkmr/wfm/issues'><HelpCircle className='mr-2 h-4 w-4' />Help</Link>
@@ -271,6 +283,7 @@ export default function InitUI(){
         </div>
         </div>
         
+        
         <div className={`flex justify-center ${ufvis ? '' : 'hidden'}`}>
 
         <div className="flex justify-center p-5 rounded-md border shadow-md m-2 ">
@@ -282,7 +295,11 @@ export default function InitUI(){
           </div>
         </form>
         </div>
+        
     </div>
+    <div className={`flex justify-center ${salvis ? '' : 'hidden'}`}>
+          <Appslist url={url}/>
+        </div>
 
         <div className="flex justify-center p-5">
       <div className="flex flex-col w-[60%] sm:w-[30%]">
@@ -307,8 +324,8 @@ export default function InitUI(){
         <tbody> */}
         <div>
 
-          {getlistoffilesfromapi(url)}
-          <Appslist url={url}/>
+          {tablev?getlistoffilesfromapi(url):""}
+          
         </div>
         {/* </tbody>
       </table> */}

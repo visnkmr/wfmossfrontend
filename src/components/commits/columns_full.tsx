@@ -18,7 +18,7 @@ import { DateTime } from 'luxon';
 import LetterClamp from '../../src/components/letterclamp';
 import '../../styles/committablestyle.css'
 import { lofiles } from '../../shared/types';
-import { setGlobalState } from '../../lib/GlobalStateContext';
+import { setGlobalState, useGlobalState } from '../../lib/GlobalStateContext';
 // export type eCommit = {
 //   reponame: string;
 //   additions: number;
@@ -45,7 +45,6 @@ import { setGlobalState } from '../../lib/GlobalStateContext';
 // });
 
 export const columns_full: ColumnDef<lofiles>[] = [
- 
   // {
   //   accessorKey: 'reponame',
   //   header: 'Reponame',

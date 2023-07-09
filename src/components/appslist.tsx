@@ -7,13 +7,24 @@ import { setGlobalState } from "../lib/GlobalStateContext";
 export function Appslist({url}:Applistprops){
     let al=getData(url).applist;
     return(<>
-    <div className="grid">
+    <div className="grid auto-cols-min w-full p-5 grid-cols-3 gap-5">
         
     { al&&al.map((each:appinfo,index:number) => {
+
+// const byteArray = Uint8Array.from(atob(each.appicon), c => c.charCodeAt(0));
+// Create a Blob from the byte array
+// const blob = new Blob([byteArray], { type: 'image/bmp' });
+
+// Create a data URL using the Blob
+// const dataUrl = URL.createObjectURL(blob);
+const dataUrl = `data:image/png;base64,${each.icon}`;
+// const dataUrl = `data:image/png;base64,${each.appicon}`;
+
         return ( 
           <>
             <Button 
-            className="rounded-md border shadow-md mr-3" 
+            key={each.appopenurl}
+            className="rounded-md border shadow-md mr-3 w-[15rem]" 
             onClick={
                 () => {
                 fetch(each.appopenurl, {
@@ -41,7 +52,10 @@ export function Appslist({url}:Applistprops){
             });
             }
             }>
+                <img src={dataUrl} alt="App Icon"  className="w-10 h-10 object-contain p-3" />
+                <p className="line-clamp-1">
                 {each.name}
+                </p>
             </Button>
           </>
         )

@@ -7,6 +7,7 @@ import Link from "next/link";
 // import React from "react";
 import a from "../exampleapisresponses/samplefileapi.json"
 import ListCommits from "./commits/commits"
+import { useGlobalState } from '../lib/GlobalStateContext';
 
   export function getData(ipaddress:string): returnedjson {
     // let ipaddress=""
@@ -67,7 +68,11 @@ import ListCommits from "./commits/commits"
       return data;
     }
 export  function getlistoffilesfromapi(ipaddress:string) {
-  
+  // let [dontshow]=useGlobalState("table-visible")
+    // if(dontshow){
+    //   return(<>
+    //   </>)
+    // }
       // console.log(data)
         // return data;
         return (
