@@ -3,16 +3,16 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Globe,Upload,Bell,HelpCircle,History } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
-import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
+import { returnedjson } from '../shared/types';
+
+import { getData, getlistoffilesfromapi } from '../components/listoffiles'
 import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation'
 import Link from "next/link";
 import { Button } from './ui/button';
 import toast, { Toaster } from 'react-hot-toast';
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
-  import 'react-toastify/dist/ReactToastify.css';
-import { ProgressDemo } from './progressbar';
-import { UploadButton } from "react-uploader";
 import axios from "axios"
+import { Appslist } from './appslist';
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -308,6 +308,7 @@ export default function InitUI(){
         <div>
 
           {getlistoffilesfromapi(url)}
+          <Appslist url={url}/>
         </div>
         {/* </tbody>
       </table> */}

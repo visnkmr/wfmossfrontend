@@ -17,7 +17,7 @@ import React from 'react';
 import { DateTime } from 'luxon';
 import LetterClamp from '../../src/components/letterclamp';
 import '../../styles/committablestyle.css'
-import { lofiles } from '../listoffiles';
+import { lofiles } from '../../shared/types';
 import { setGlobalState } from '../../lib/GlobalStateContext';
 // export type eCommit = {
 //   reponame: string;

@@ -7,16 +7,13 @@ import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { useQuery } from '@tanstack/react-query';
 import a from "../../exampleapisresponses/samplefileapi.json"
-import {getData, lofiles} from "../listoffiles"
+import {getData} from "../listoffiles"
+import {lofiles,dtableprops} from "../../shared/types"
 import { useGlobalState } from '../../lib/GlobalStateContext';
 import { ProgressDemo } from '../progressbar';
 import Balancer from 'react-wrap-balancer'
 
-  interface dtableprops{
-    columns:ColumnDef<lofiles>[];
-    ipaddress:string;
-    // data:lofiles[]
-  }
+
   export default function Dtable({columns,ipaddress}:dtableprops) {
     let data = getData(ipaddress).filelist;
     let fsz = getData(ipaddress).freesize;
@@ -36,9 +33,11 @@ import Balancer from 'react-wrap-balancer'
         {/* <p>{percinuse}</p> */}
         
         <ProgressDemo p={Math.ceil(percinuse)}/>
+          <h1 className={`text-center p-10 ${dontshow ? '' : 'hidden'}`}>
         <Balancer>
-          <h1 className={`text-center p-10 ${dontshow ? '' : 'hidden'}`}>{`${(ipad==="")?"":""}Click on connect button to list the files or use the upload button after selecting the file to upload it.`}</h1>
+            {`${(ipad==="")?"":""}Click on connect button to list the files or use the upload button after selecting the file to upload it.`}
           </Balancer>
+            </h1>
       <div className={dontshow ? 'hidden' : ''}>
         <DataTable columns={columns} data={data} />
       </div>

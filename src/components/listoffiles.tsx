@@ -1,32 +1,13 @@
 'use client'
+import { returnedjson } from '../shared/types';
+
 import { useQuery,useQueryClient } from "@tanstack/react-query";
 import axios from 'axios'
 import Link from "next/link";
 // import React from "react";
 import a from "../exampleapisresponses/samplefileapi.json"
 import ListCommits from "./commits/commits"
-export interface returnedjson{
-  version:number,
-  currentpath:string,
-  storageinuse:number;
-  totalstorage:number;
-  freesize:string;
-  percentsizefree:string;
-  filelist:lofiles[];
-}
-export interface lofiles
-  {
-    filename:string,
-    openapi:string,
-    downloadapi:string,
-    filesize:number,
-    lastmodified:string,
-    isfile:boolean
 
-  };
-  interface filelistprops {
-    ipaddress:string
-  }
   export function getData(ipaddress:string): returnedjson {
     // let ipaddress=""
       // nextjs 13 fetching api from our api folder/payments

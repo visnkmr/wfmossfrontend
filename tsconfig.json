@@ -1,7 +1,7 @@
 {
   "include": [
     "src/*.d.ts",
-    "src/shared/*.d.ts",
+    "shared/*.d.ts",
     "src/shared/*.tsx",
     "src/components/*.tsx",
     "src/*.ts",
@@ -11,8 +11,9 @@
     ".next/types/**/*.ts" ],
   "compilerOptions": {
     // "typeRoots": [
-    //   "./node_modules/@types",
-    //   "./typings"
+    //   // "./node_modules/@types",
+    //   "./shared/types"
+    //   // "./typings"
     // ],
     "target": "ESNext",
     "useDefineForClassFields": true,
