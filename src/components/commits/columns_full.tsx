@@ -121,7 +121,10 @@ export const columns_full: ColumnDef<lofiles>[] = [
         // Handle the response from the server
         // console.log(what);
         if(data===200){
-          console.log("opened file on device successfully.")
+          let message="opened file on device successfully."
+          console.log(message)
+          setGlobalState("toast-visible",true)
+          setGlobalState("toast",message)
         }
         else {
           console.log("failed")

@@ -3,6 +3,7 @@ import { Applistprops, appinfo } from "../shared/types";
 import { getData } from "./listoffiles";
 import { Button } from "./ui/button";
 import { setGlobalState } from "../lib/GlobalStateContext";
+import axios from "axios"
 
 export function Appslist({url}:Applistprops){
     let al=getData(url).applist;
@@ -27,20 +28,23 @@ const dataUrl = `data:image/png;base64,${each.icon}`;
             className="rounded-md border shadow-md mr-3 w-[15rem]" 
             onClick={
                 () => {
-                fetch(each.appopenurl, {
-                method: 'POST',
+                    axios.request({
+                        method: "post",
+                        url: each.appopenurl
             })
             .then(response => 
                 {
                 console.log(response);
-                return response.status
+                return response
                 })
             .then(data => {
                 // let what=data[0] as st
                 // Handle the response from the server
                 // console.log(what);
-                if(data===200){
-                console.log("opened file on device successfully.")
+                if(data.status===200){
+                let message="opened app successfully "+(data.data).opened
+                setGlobalState("toast-visible",true)
+                setGlobalState("toast",message)
                 }
                 else {
                 console.log("failed")

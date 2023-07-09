@@ -213,13 +213,13 @@ export default function InitUI(){
         // Handle the response from the server
         // console.log(what);
         // if(data===200){
-          setGlobalState("toast-visible",true)
-        // setGlobalState("toast","uploaded file "+file.name)
+          // setGlobalState("toast","uploaded file "+file.name)
           let message="succeeded to send "+file.name+" to "+data.savedat;
           console.log(message)
+          setGlobalState("toast-visible",true)
           setGlobalState("toast",message)
           // settoastv(true)
-        // }
+          // }
         // else {
         //   console.log("failed")
         // }
