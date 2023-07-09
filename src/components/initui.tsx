@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Globe,Upload,Bell,HelpCircle } from 'lucide-react';
+import { Globe,Upload,Bell,HelpCircle,History } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { getData, getlistoffilesfromapi, returnedjson } from '../components/listoffiles'
@@ -248,6 +248,7 @@ export default function InitUI(){
         <div className='flex justify-center'>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md mr-3" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
+          <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md mr-3" href={`http://${ipaddress}/old`}><History className='mr-2 h-4 w-4' />Old version</Link>
           <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" target="_blank" href='http://github.com/visnkmr/wfm/issues'><HelpCircle className='mr-2 h-4 w-4' />Help</Link>
         </div>
         
