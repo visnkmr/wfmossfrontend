@@ -249,7 +249,7 @@ export default function InitUI(){
         
         </div> */}
         <div className='flex justify-center'>
-          <div className='sm:grid-flow-col'>
+          <div className='grid-flow-col m-5'>
 
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{
@@ -269,7 +269,7 @@ export default function InitUI(){
         </div>
         
            <div className={`flex justify-center ${ipvis ? '' : 'hidden'}`}>
-        <div className={`rounded-md border shadow-md p-4 m-2 }`}>
+        <div className={`rounded-md border shadow-md p-2 m-2 }`}>
           {/* <h2 className='flex justify-center'>Connected to: {ipaddress}</h2> */}
        
           <p className="mt-5 flex justify-center">{"Enter IP address to connect to"}</p>

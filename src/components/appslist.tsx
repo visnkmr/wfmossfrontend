@@ -8,7 +8,7 @@ import axios from "axios"
 export function Appslist({url}:Applistprops){
     let al=getData(url).applist;
     return(<>
-    <div className="grid-flow-col w-full p-5 gap-5">
+    <div className="grid-flow-col w-full p-5 gap-5 ">
         
     { al&&al.map((each:appinfo,index:number) => {
 
@@ -25,7 +25,7 @@ const dataUrl = `data:image/png;base64,${each.icon}`;
           <>
             <Button 
             key={each.appopenurl}
-            className="rounded-md border shadow-md mr-3 w-[15rem]" 
+            className="rounded-md border shadow-md h-20 mr-3 w-[15rem]" 
             onClick={
                 () => {
                     axios.request({
@@ -56,7 +56,7 @@ const dataUrl = `data:image/png;base64,${each.icon}`;
             });
             }
             }>
-                <img src={dataUrl} alt="App Icon"  className="w-10 h-10 object-contain p-3" />
+                <img src={dataUrl} alt="App Icon"  className="h-full object-contain p-3" />
                 <p className="line-clamp-1">
                 {each.name}
                 </p>
