@@ -204,7 +204,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
   //   },
   // }
   ,{
-    accessorKey: 'size',
+    accessorKey: 'filesize',
     header: ({ column }) => {
       return (
         <Button
@@ -236,7 +236,7 @@ export const columns_full: ColumnDef<lofiles>[] = [
       );
     },
   },{
-    accessorKey: 'time',
+    accessorKey: 'lastmodified',
     header: ({ column }) => {
       return (
         <Button
