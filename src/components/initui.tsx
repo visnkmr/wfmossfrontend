@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Globe,Upload,Bell,HelpCircle,History,Grid,HardDrive } from 'lucide-react';
+import { Globe,Upload,Bell,HelpCircle,History,Grid,HardDrive,RefreshCcw } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { returnedjson } from '../shared/types';
@@ -13,6 +13,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 import axios from "axios"
 import { Appslist } from './appslist';
+import { DataTable } from './commits/data-table';
+import { columns_full } from './commits/columns_full';
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -46,7 +48,7 @@ export default function InitUI(){
   let firstime=useRef(true)
   // let ft=useRef(true)
   const inputRef = useRef(null);
-  const [ipvis,setipvis] = useState(true);
+  const [ipvis,setipvis] = useState(false);
   const [toastv] = useGlobalState("toast-visible");
   const [tablev] = useGlobalState("table-visible");
   const [toastcontent] = useGlobalState("toast");
@@ -54,12 +56,22 @@ export default function InitUI(){
   const [salvis,setsalvis] = useState(false);
   // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
-  const [url] = useGlobalState("ipaddress");
+  let [url] = useGlobalState("ipaddress");
+
+  const [dummyState, setDummyState] = useState(0);
+
+  const forceUpdate = () => {
+    setDummyState(dummyState + 1);
+  };
+
 
   // var toastNotification = ToastNotification();
 // let [uua,setuua]=useState("")
     
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
+    setGlobalState("ipaddress",ipaddress)
+    if(!url.includes("http"))
+    url=`http://${ipaddress}/api/json/v1`;
     // if(ipaddress &&(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"")!=="" && ft.current){
     //   console.log("rhere")
     //   console.log("ipaddress"+ipaddress)
@@ -252,6 +264,7 @@ export default function InitUI(){
         <div className='flex justify-center'>
           <div className='grid-flow-col m-5'>
 
+          <Button className="rounded-md border shadow-md mr-3" onClick={()=>{forceUpdate}}><RefreshCcw className='mr-2 h-4 w-4' />Reload</Button>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
           <Button className="rounded-md border shadow-md mr-3" onClick={()=>{
             setsalvis(true);
@@ -307,7 +320,6 @@ export default function InitUI(){
 
         {/* <div className="flex justify-center p-5">
       <div className="flex flex-col w-[60%] sm:w-[30%]"> */}
-        
         {/* <ProgressDemo a={ipaddress}/> */}
         {/* <progress id="pr" max="100" value="77.68211229853571"></progress> */}
         {/* <p>
@@ -328,7 +340,7 @@ export default function InitUI(){
         <tbody> */}
 
         <div>
-
+        {/* <DataTable columns={columns_full} data={!getData(url).filelist?[]:getData(url).filelist} /> */}
           {tablev?getlistoffilesfromapi(url):""}
           
         </div>
