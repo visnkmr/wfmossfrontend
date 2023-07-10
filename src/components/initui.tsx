@@ -244,6 +244,7 @@ export default function InitUI(){
     return(
         <>
         <Toaster />
+
         {/* <div className='flex justify-center m-2 '>
         <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toastcontent} <span className='ml-2' >x</span></Button>
         
@@ -304,16 +305,16 @@ export default function InitUI(){
           <Appslist url={url}/>
         </div>
 
-        <div className="flex justify-center p-5">
-      <div className="flex flex-col w-[60%] sm:w-[30%]">
+        {/* <div className="flex justify-center p-5">
+      <div className="flex flex-col w-[60%] sm:w-[30%]"> */}
         
         {/* <ProgressDemo a={ipaddress}/> */}
         {/* <progress id="pr" max="100" value="77.68211229853571"></progress> */}
         {/* <p>
           Seleted Storage has
         </p> */}
-      </div>
-        </div>
+      {/* </div>
+        </div> */}
     <div>
       {/* <table>
         <thead>
@@ -325,11 +326,13 @@ export default function InitUI(){
           </tr>
         </thead>
         <tbody> */}
+
         <div>
 
           {tablev?getlistoffilesfromapi(url):""}
           
         </div>
+        
         {/* </tbody>
       </table> */}
     </div>

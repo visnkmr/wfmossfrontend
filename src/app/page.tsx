@@ -62,7 +62,7 @@ export default function Page() {
       <>
       {/* <ThemeProvider> */}
       {/* <div className={dark ? 'dark' : ''}> */}
-      <div className="dark:bg-gray-900 flex flex-col justify-center p-10">
+      <div className="dark:bg-gray-900 flex flex-col justify-center p-5">
           <InitUI/>
           {/* <Homepage/> */}
           {/* <Planglist/> */}
@@ -74,6 +74,10 @@ export default function Page() {
 
           <Link className="inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" href={`http://visnkmr.github.io` } target='_blank'><Home className='mr-2 h-4 w-4' />Vishnu N K</Link>
           </div>
+          <div className='flex justify-center p-5'>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3ktXIFv35Yo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        </div>
           {/* <p className="text-center flex justify-center italic p-10">This page was made using NextJS, React and Tailwind.</p> */}
       </div>
 
