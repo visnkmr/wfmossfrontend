@@ -287,7 +287,7 @@ export default function InitUI(){
           {/* <h2 className='flex justify-center'>Connected to: {ipaddress}</h2> */}
        
           {/* <p className="mt-5 flex justify-center">{""}</p> */}
-          <div className="flex justify-center p-2">
+          <div className="flex flex-col justify-center p-2">
             <Input
                 id="ipaddress"
                 ref={inputRef}
@@ -295,7 +295,10 @@ export default function InitUI(){
                 className='max-w-sm'
                 defaultValue={ipaddress}
               />
+              <div className='flex justify-center p-4'>
+
             <Button className="ml-4 rounded-md border shadow-md" onClick={handleClick} variant={"default"}>Connect</Button>
+              </div>
           </div>
         </div>
         </div>
@@ -306,9 +309,11 @@ export default function InitUI(){
         <div className="flex justify-center p-5 rounded-md border shadow-md m-2 ">
         <form>
             {/* <p className="mb-5 mt-5 flex justify-center">{"Select file and click Send"}</p> */}
-          <div className="flex flex-row">
+          <div className="flex flex-col">
             <Input type="file" name="upfile" id="fileInput" required={true}/>
-            <Button className="ml-4 rounded-md border shadow-md" type="submit" onClick={handleUpload}>Upload</Button>
+            <div className='flex justify-center'>
+              <Button className="m-4 rounded-md border shadow-md" type="submit" onClick={handleUpload}>Upload</Button>
+              </div>
           </div>
         </form>
         </div>
