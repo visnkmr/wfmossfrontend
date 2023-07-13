@@ -37,7 +37,7 @@ import Balancer from 'react-wrap-balancer'
         <ProgressDemo p={Math.ceil(percinuse)}/>
           <h1 className={`text-center p-10 ${dontshow ? '' : 'hidden'}`}>
         <Balancer>
-            {`${(ipad==="")?"":""}Click on connect button to list the files or use the upload button after selecting the file to upload it.`}
+            {`${(ipad==="")?"":""}Loading file list...Please wait, in the meantime you are free to use the upload button after selecting the file to upload it.`}
           </Balancer>
             </h1>
       <div className={dontshow ? 'hidden' : ''}>
