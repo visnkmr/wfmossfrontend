@@ -5,48 +5,66 @@ import { Button } from "./ui/button";
 import { setGlobalState } from "../lib/GlobalStateContext";
 import axios from "axios"
 import b from "../exampleapisresponses/samplefileapi.json"
+import { useState } from "react";
+import { Input } from "./ui/input";
+// import {distance,closest} from "fastest-levenshtein";
+import Fuse from "fuse.js"
 
-interface showappslist{
-    name:string,
-    icon:string,
-    appopenurl:string,
-    shouldshow:boolean
-}
-interface appinfo{
-    name:string,
-    icon:string,
-    appopenurl:string
-}
+function compareStrings(str1, str2) {
+       const ratio = distance(str1, str2);
+       console.log(str1+"\t"+str2+"\t"+ratio)
+       // Use a threshold to determine if the strings are similar enough
+       if (ratio >= 0) {
+         // Strings are similar
+         return true;
+       } else {
+         // Strings are not similar
+         return false;
+       }
+     }
+
 export function Appslist({url}:Applistprops){
-    let al=b.applist as appinfo[];
-    let a=[] as showappslist[]
-    let tosearch=""
+    const options = {
+        includeScore: true
+      }
+      
+      
+      let [tosearch,setsearch]=useState("")
+      let al=b.applist as appinfo[];
+      let a=[] as appinfo[]
+      const fuse = new Fuse(list, options)
     // let ia:appinfo;
-    al.map((ia:appinfo,index:number) => {
+     al.map((ia:appinfo,index:number) => {
         let shouldshow=false;
         if(tosearch==="")
             shouldshow=true;
-        else
-            {
-                if(ia.name.includes(tosearch)){
-                    shouldshow=true
-                }
-            }
-
+        else if(compareStrings(ia.name,tosearch)){
+        // else if(ia.name.includes(tosearch)){
+            shouldshow=true
+        }
+        if(shouldshow)
         a=[...a,
         ...[{
                 name:ia.name,
                 icon:ia.icon,
-                appopenurl:ia.appopenurl,
-                shouldshow:shouldshow
+                appopenurl:ia.appopenurl
             }]
         ]
     });
     // let al=getData(url).applist;
     return(<>
     <div className="grid-flow-col w-full p-5 gap-5 ">
-    
-    { al&&al.map((each:appinfo,index:number) => {
+    <div className="flex justify-center m-5">
+        <Input
+          placeholder="Search in apps..."
+        //   value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            setsearch(event.target.value.toString().toLocaleLowerCase())
+          }
+          className="max-w-sm"
+        />
+    </div>
+    { a&&a.map((each:appinfo,index:number) => {
 
 // const byteArray = Uint8Array.from(atob(each.appicon), c => c.charCodeAt(0));
 // Create a Blob from the byte array
@@ -59,6 +77,7 @@ const dataUrl = `data:image/png;base64,${each.icon}`;
 
         return ( 
           <>
+          
             <Button 
             key={each.appopenurl}
             className="rounded-md border shadow-md h-20 mr-3 w-[15rem]" 
