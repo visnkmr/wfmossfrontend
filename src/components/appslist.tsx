@@ -7,51 +7,22 @@ import axios from "axios"
 import b from "../exampleapisresponses/samplefileapi.json"
 import { useState } from "react";
 import { Input } from "./ui/input";
-// import {distance,closest} from "fastest-levenshtein";
 import Fuse from "fuse.js"
 
-function compareStrings(str1, str2) {
-       const ratio = distance(str1, str2);
-       console.log(str1+"\t"+str2+"\t"+ratio)
-       // Use a threshold to determine if the strings are similar enough
-       if (ratio >= 0) {
-         // Strings are similar
-         return true;
-       } else {
-         // Strings are not similar
-         return false;
-       }
-     }
 
 export function Appslist({url}:Applistprops){
     const options = {
-        includeScore: true
+        includeScore: true,
+        keys:['name']
       }
       
       
       let [tosearch,setsearch]=useState("")
       let al=b.applist as appinfo[];
-      let a=[] as appinfo[]
-      const fuse = new Fuse(list, options)
-    // let ia:appinfo;
-     al.map((ia:appinfo,index:number) => {
-        let shouldshow=false;
-        if(tosearch==="")
-            shouldshow=true;
-        else if(compareStrings(ia.name,tosearch)){
-        // else if(ia.name.includes(tosearch)){
-            shouldshow=true
-        }
-        if(shouldshow)
-        a=[...a,
-        ...[{
-                name:ia.name,
-                icon:ia.icon,
-                appopenurl:ia.appopenurl
-            }]
-        ]
-    });
-    // let al=getData(url).applist;
+    //   let a=[] as appinfo[]
+      const fuse = new Fuse(al, options)
+      let a=tosearch===""?al:fuse.search(tosearch).map((result) => result.item);
+      console.log(a)
     return(<>
     <div className="grid-flow-col w-full p-5 gap-5 ">
     <div className="flex justify-center m-5">
@@ -64,7 +35,7 @@ export function Appslist({url}:Applistprops){
           className="max-w-sm"
         />
     </div>
-    { a&&a.map((each:appinfo,index:number) => {
+    { a&&a.map((each,index:number) => {
 
 // const byteArray = Uint8Array.from(atob(each.appicon), c => c.charCodeAt(0));
 // Create a Blob from the byte array
