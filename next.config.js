@@ -58,6 +58,9 @@ const nextConfig =
   webpack: (config,{nextRuntime}
     // , { dev, isServer }
     ) => {
+      // if (!isServer) {
+        // config.optimization.minimize = false;
+      // }
       // if (options.isServer) {
       //   config.externals = ['@tanstack/react-query', ...config.externals];
       // }

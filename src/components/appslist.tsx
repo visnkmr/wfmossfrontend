@@ -4,7 +4,7 @@ import { getData } from "./listoffiles";
 import { Button } from "./ui/button";
 import { setGlobalState } from "../lib/GlobalStateContext";
 import axios from "axios"
-import b from "../exampleapisresponses/samplefileapi.json"
+// import b from "../exampleapisresponses/samplefileapi.json"
 import { useState } from "react";
 import { Input } from "./ui/input";
 import Fuse from "fuse.js"
@@ -18,12 +18,14 @@ export function Appslist({url}:Applistprops){
       
       
       let [tosearch,setsearch]=useState("")
-      let al=b.applist as appinfo[];
+    //   let al=b.applist as appinfo[];
+      let al=getData(url).applist as appinfo[];
     //   let a=[] as appinfo[]
       const fuse = new Fuse(al, options)
       let a=tosearch===""?al:fuse.search(tosearch).map((result) => result.item);
       console.log(a)
-    return(<>
+    return(
+    <>
     <div className="grid-flow-col w-full p-5 gap-5 ">
     <div className="flex justify-center m-5">
         <Input

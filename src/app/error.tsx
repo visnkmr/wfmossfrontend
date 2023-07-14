@@ -12,12 +12,12 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  //  useEffect(() => {
-  //   // Redirect to a specific link on error
-  //   if (typeof window !== 'undefined') {
-  //     window.location.href = '/old';
-  //   }
-  // }, []);
+   useEffect(() => {
+    // Redirect to a specific link on error
+    if (typeof window !== 'undefined') {
+      window.location.href = '/old';
+    }
+  }, []);
 
   return (
     <div className='flex justify-center flex-col'>
