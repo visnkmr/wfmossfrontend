@@ -4,12 +4,48 @@ import { getData } from "./listoffiles";
 import { Button } from "./ui/button";
 import { setGlobalState } from "../lib/GlobalStateContext";
 import axios from "axios"
+import b from "../exampleapisresponses/samplefileapi.json"
 
+interface showappslist{
+    name:string,
+    icon:string,
+    appopenurl:string,
+    shouldshow:boolean
+}
+interface appinfo{
+    name:string,
+    icon:string,
+    appopenurl:string
+}
 export function Appslist({url}:Applistprops){
-    let al=getData(url).applist;
+    let al=b.applist as appinfo[];
+    let a=[] as showappslist[]
+    let tosearch=""
+    // let ia:appinfo;
+    al.map((ia:appinfo,index:number) => {
+        let shouldshow=false;
+        if(tosearch==="")
+            shouldshow=true;
+        else
+            {
+                if(ia.name.includes(tosearch)){
+                    shouldshow=true
+                }
+            }
+
+        a=[...a,
+        ...[{
+                name:ia.name,
+                icon:ia.icon,
+                appopenurl:ia.appopenurl,
+                shouldshow:shouldshow
+            }]
+        ]
+    });
+    // let al=getData(url).applist;
     return(<>
     <div className="grid-flow-col w-full p-5 gap-5 ">
-        
+    
     { al&&al.map((each:appinfo,index:number) => {
 
 // const byteArray = Uint8Array.from(atob(each.appicon), c => c.charCodeAt(0));
