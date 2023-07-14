@@ -1,6 +1,6 @@
 'use client'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Globe,Upload,Bell,HelpCircle,History,Grid,HardDrive,RefreshCcw } from 'lucide-react';
+import { Globe,Upload,Bell,HelpCircle,History,Grid,HardDrive,RefreshCcw,FileWarning } from 'lucide-react';
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from '../components/ui/input';
 import { returnedjson } from '../shared/types';
@@ -261,6 +261,14 @@ export default function InitUI(){
         <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toastcontent} <span className='ml-2' >x</span></Button>
         
         </div> */}
+        <div className='flex rounded-md border shadow-md m-2 p-5 text-bold bg-green-400 text-black' >
+          <span>
+            <FileWarning className='mr-2 h-4 w-4'/>
+            </span>
+            <span>
+              You may experience reduced feature set as compared to previous version if you downloaded the app from google play. The version of the app available on amazon appstore offers feature parity with previous version. Get in touch on <a href="https://github.com/visnkmr/wfm/issues">github</a> with queries and suggestions.
+              </span>
+              </div>
         <div className='flex justify-center'>
           <div className='grid-flow-row m-5 gap-2'>
           <Button variant={"destructive"} className="rounded-md border shadow-md m-2" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>

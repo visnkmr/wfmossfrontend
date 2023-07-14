@@ -4,7 +4,11 @@ import React from 'react'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
+import axios from "axios"
+// import { AppCenterCrashes } from "appcenter-crashes";
 
+// Initialize App Center Crash Analytics
+// AppCenterCrashes.start("YOUR_APP_SECRET");
 export default function Error({
   error,
   reset,
@@ -12,7 +16,17 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  
    useEffect(() => {
+    console.log(error)
+    let sendata=JSON.stringify(error)
+    axios.post("/api/report", { sendata })
+    .then((response) => {
+      console.log(response.data.message); // Success message from the API endpoint
+    })
+    .catch((error) => {
+      console.error(error); // Error occurred while sending the bug report
+    });
     // Redirect to a specific link on error
     if (typeof window !== 'undefined') {
       window.location.href = '/old';
