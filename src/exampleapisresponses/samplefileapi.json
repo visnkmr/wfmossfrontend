@@ -1,11 +1,13 @@
 
   {
+    "version":"1",
     "currentpath":"/",
     "storageinuse":"",
     "totalstorage":"",
     "freesize":"",
     "percentsizefree":"",
-    "filelist":[{
+    "filelist":[
+      {
         "filename":"filename1.extension",
         "openapi":"/delete.html?path=",
         "downloadapi":"/download/filename?path=",
@@ -21,5 +23,29 @@
         "lastmodified":"days ago",
         "isfile":true
     
-      }]
+      }
+    ],
+    "applist":[
+      {
+        "appopenurl":"",
+        "icon":"",
+        "name":"backgroud apps list"
+    
+      },{
+        "appopenurl":"",
+        "icon":"",
+        "name":"wireless file manager"
+    
+      },{
+        "appopenurl":"",
+        "icon":"",
+        "name":"test netspeed"
+    
+      },{
+        "appopenurl":"",
+        "icon":"",
+        "name":"time netspeed monitor"
+    
+      }
+    ]
     }

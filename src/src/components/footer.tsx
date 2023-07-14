@@ -69,7 +69,7 @@ export default function Footer() {
             <div className="">
               <span>
                 <p>
-                  Make the site better, just submit PR after making changes. Source code available <Link href={"https://github.com/visnkmr/wfmpage"}>here</Link>
+                  Make the site better, just submit PR after making changes. Source code available <Link href={"https://github.com/visnkmr/wfmossfrontend"}>here</Link>
                   </p>
               </span>
             </div>
