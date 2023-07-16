@@ -245,7 +245,8 @@ export default function InitUI(){
         console.error(error);
       });
     }
-    let showoldv=ipaddress!==""
+    let showoldv=ipaddress!=="";
+    let SHOWBETTERAVAILABLE=false;
     
     // React.useEffect(() => {
     //     setipaddress(ipad as string)
@@ -261,7 +262,7 @@ export default function InitUI(){
         <Button className={`bg-green-500 text-black ml-4 rounded-md border shadow-md ${toastv ? '' : 'hidden'}`} onClick={()=>{settoastv(!toastv)}} variant={"default"}><Bell className='mr-2 h-4 w-4' /> {toastcontent} <span className='ml-2' >x</span></Button>
         
         </div> */}
-        <div className='flex rounded-md border shadow-md m-2 p-5 text-bold bg-green-400 text-black' >
+        <div className={`${SHOWBETTERAVAILABLE?"":"hidden"} flex rounded-md border shadow-md m-2 p-5 text-bold bg-green-400 text-black`} >
           <span>
             <FileWarning className='mr-2 h-4 w-4'/>
             </span>

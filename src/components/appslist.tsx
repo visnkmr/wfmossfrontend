@@ -8,8 +8,35 @@ import axios from "axios"
 import { useState } from "react";
 import { Input } from "./ui/input";
 import Fuse from "fuse.js"
+import { useQuery } from "@tanstack/react-query";
 
-
+let listapps=()=>{
+  let { data,isError } = useQuery({ 
+    // enabled:false,
+    queryKey:["apl"],
+    
+    queryFn: async()=>{
+      
+      const response = await axios.get(`/api/json/v1/apps`)
+      // return a
+      // console.log(response.data)
+        return response.data
+    },
+    retry:false,
+    // refetchOnMount:true,
+    
+    cacheTime:0,
+    
+    staleTime:0,
+    // refetchOnWindowFocus:false,
+    
+    
+  
+  })
+  if(!data || isError)
+  data=[]
+  return data
+}
 export function Appslist({url}:Applistprops){
     const options = {
         includeScore: true,
@@ -19,7 +46,7 @@ export function Appslist({url}:Applistprops){
       
       let [tosearch,setsearch]=useState("")
     //   let al=b.applist as appinfo[];
-      let al=getData(url).applist as appinfo[];
+      let al=listapps() as appinfo[];
     //   let a=[] as appinfo[]
       const fuse = new Fuse(al, options)
       let a=tosearch===""?al:fuse.search(tosearch).map((result) => result.item);
