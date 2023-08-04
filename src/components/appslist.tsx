@@ -37,6 +37,34 @@ let listapps=()=>{
   data=[]
   return data
 }
+
+let getappicon=(name:string)=>{
+  let { data,isError } = useQuery({ 
+    // enabled:false,
+    queryKey:[`${name}`],
+    
+    queryFn: async()=>{
+      
+      const response = await axios.get(`/api/icon?pkgname=${name}`)
+      // return a
+      // console.log(response.data)
+        return response.data
+    },
+    retry:false,
+    // refetchOnMount:true,
+    
+    cacheTime:0,
+    
+    staleTime:0,
+    // refetchOnWindowFocus:false,
+    
+    
+  
+  })
+  if(!data || isError)
+  data=""
+  return data
+}
 export function Appslist({url}:Applistprops){
     const options = {
         includeScore: true,
@@ -72,7 +100,7 @@ export function Appslist({url}:Applistprops){
 
 // Create a data URL using the Blob
 // const dataUrl = URL.createObjectURL(blob);
-const dataUrl = `data:image/png;base64,${each.icon}`;
+const dataUrl = `data:image/png;base64,${getappicon(each.pkgname)}`;
 // const dataUrl = `data:image/png;base64,${each.appicon}`;
 
         return ( 

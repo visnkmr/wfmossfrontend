@@ -26,7 +26,8 @@ interface lofiles
   {
     name:string;
     appopenurl:string;
-    icon:string;
+    pkgname:string;
+    // icon:string;
 
   }
   interface filelistprops {
