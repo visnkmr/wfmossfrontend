@@ -2,13 +2,13 @@ import Link from "next/link";
 import { Applistprops, appinfo } from "../shared/types";
 import { getData } from "./listoffiles";
 import { Button } from "./ui/button";
-import { setGlobalState } from "../lib/GlobalStateContext";
 import axios from "axios"
 // import b from "../exampleapisresponses/samplefileapi.json"
 import { useState } from "react";
 import { Input } from "./ui/input";
 import Fuse from "fuse.js"
 import { useQuery } from "@tanstack/react-query";
+import Eapp from "./eachapp";
 
 let listapps=()=>{
   let { data,isError } = useQuery({ 
@@ -17,9 +17,9 @@ let listapps=()=>{
     
     queryFn: async()=>{
       
-      const response = await axios.get(`/api/json/v1/apps`)
+      const response = await axios.get(`http://10.0.0.97:8080/api/json/v1/apps`)
       // return a
-      // console.log(response.data)
+      console.log(response.data)
         return response.data
     },
     retry:false,
@@ -38,33 +38,7 @@ let listapps=()=>{
   return data
 }
 
-let getappicon=(name:string)=>{
-  let { data,isError } = useQuery({ 
-    // enabled:false,
-    queryKey:[`${name}`],
-    
-    queryFn: async()=>{
-      
-      const response = await axios.get(`/api/icon?pkgname=${name}`)
-      // return a
-      // console.log(response.data)
-        return response.data
-    },
-    retry:false,
-    // refetchOnMount:true,
-    
-    cacheTime:0,
-    
-    staleTime:0,
-    // refetchOnWindowFocus:false,
-    
-    
-  
-  })
-  if(!data || isError)
-  data=""
-  return data
-}
+
 export function Appslist({url}:Applistprops){
     const options = {
         includeScore: true,
@@ -75,6 +49,7 @@ export function Appslist({url}:Applistprops){
       let [tosearch,setsearch]=useState("")
     //   let al=b.applist as appinfo[];
       let al=listapps() as appinfo[];
+      console.log(al)
     //   let a=[] as appinfo[]
       const fuse = new Fuse(al, options)
       let a=tosearch===""?al:fuse.search(tosearch).map((result) => result.item);
@@ -93,57 +68,20 @@ export function Appslist({url}:Applistprops){
         />
     </div>
     { a&&a.map((each,index:number) => {
-
+      
 // const byteArray = Uint8Array.from(atob(each.appicon), c => c.charCodeAt(0));
 // Create a Blob from the byte array
 // const blob = new Blob([byteArray], { type: 'image/bmp' });
 
 // Create a data URL using the Blob
 // const dataUrl = URL.createObjectURL(blob);
-const dataUrl = `data:image/png;base64,${getappicon(each.pkgname)}`;
+// const dataUrl = `data:image/png;base64,${getappicon(each.pkgname)}`;
 // const dataUrl = `data:image/png;base64,${each.appicon}`;
 
         return ( 
           <>
-          
-            <Button 
-            key={each.appopenurl}
-            className="rounded-md border shadow-md h-20 mr-3 w-[15rem]" 
-            onClick={
-                () => {
-                    axios.request({
-                        method: "post",
-                        url: each.appopenurl
-            })
-            .then(response => 
-                {
-                console.log(response);
-                return response
-                })
-            .then(data => {
-                // let what=data[0] as st
-                // Handle the response from the server
-                // console.log(what);
-                if(data.status===200){
-                let message="opened app successfully "+(data.data).opened
-                setGlobalState("toast-visible",true)
-                setGlobalState("toast",message)
-                }
-                else {
-                console.log("failed")
-                }
-            })
-            .catch(error => {
-                // Handle any errors
-                console.error(error);
-            });
-            }
-            }>
-                <img src={dataUrl} alt="App Icon"  className="h-full object-contain p-3" />
-                <p className="line-clamp-1">
-                {each.name}
-                </p>
-            </Button>
+          <Eapp app = {each}/>
+            
           </>
         )
     })}
