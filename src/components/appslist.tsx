@@ -17,7 +17,7 @@ let listapps=()=>{
     
     queryFn: async()=>{
       
-      const response = await axios.get(`http://10.0.0.97:8080/api/json/v1/apps`)
+      const response = await axios.get(`/api/json/v1/apps`)
       // return a
       console.log(response.data)
         return response.data

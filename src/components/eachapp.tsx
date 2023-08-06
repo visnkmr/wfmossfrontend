@@ -10,7 +10,7 @@ interface appprops{
 
 export default function Eapp({app}:appprops){
     {
-        let iconurl="http://10.0.0.97:8080/api/icon?pkgname="+app.pkgname
+        let iconurl="/api/icon?pkgname="+app.pkgname
         console.log(`data:image/png;base64,${getappicon(iconurl)}`)
         return (
             // <p>`data:image/png;base64,${getappicon(iconurl)}`</p>
