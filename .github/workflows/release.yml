@@ -85,7 +85,7 @@ jobs:
         with:
           workspaces: "./desktop/src-tauri -> target"
 
-       - name: Uninstall Homebrew
+      - name: Uninstall Homebrew
         run: |
           NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
