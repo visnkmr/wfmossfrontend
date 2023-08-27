@@ -75,10 +75,18 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      - name: install Rust stable
+      - name: Rust setup
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.settings.target }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./desktop/src-tauri -> target"
+
       - name: install dependencies (ubuntu only)
-        if: contains(matrix.platform, 'ubuntu')
+        if: contains(matrix.settings.host, 'ubuntu')
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
@@ -88,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: "--target ${{ matrix.settings.target }}"
+          # args: "--target ${{ matrix.settings.target }}"
           # tagName: ${{ env.TAG }} 
           # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: 'App v__VERSION__'
