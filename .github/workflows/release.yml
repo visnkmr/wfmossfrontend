@@ -26,11 +26,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-           const currentDate = new Date().toISOString();
+            const currentDate = new Date().toISOString();
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: currentdate,
+              tag_name: currentDate,
               name: `WFMOSSFrontend for PC v${process.env.PACKAGE_VERSION}`,
               body: 'Checkout commit for detailed changelog on what has changed.',
               draft: true,
