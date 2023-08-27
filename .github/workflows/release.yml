@@ -96,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # args: "--target ${{ matrix.settings.target }}"
+          args: "--target ${{ matrix.settings.target }}"
           # tagName: ${{ env.TAG }} 
           # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: 'App v__VERSION__'
