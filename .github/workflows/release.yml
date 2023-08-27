@@ -85,8 +85,9 @@ jobs:
         with:
           workspaces: "./desktop/src-tauri -> target"
 
-      - name: Remove homebrew
-        uses: autobrew/uninstall-homebrew@master
+       - name: Uninstall Homebrew
+        run: |
+          NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
       - name: install dependencies (ubuntu only)
         if: contains(matrix.settings.host, 'ubuntu')
