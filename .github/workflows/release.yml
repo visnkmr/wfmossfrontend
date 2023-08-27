@@ -26,11 +26,13 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const currentDate = new Date().toISOString();
+            let tagDate = isoDate.substring(0, 10); // "2023-08-27"
+            let tagTime = isoDate.substring(11, 19).replace(/:/g, ''); // "123456"
+            let githubTag = `${tagDate}-${tagTime}`; 
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: currentDate,
+              tag_name: githubTag,
               name: `WFMOSSFrontend for PC v${process.env.PACKAGE_VERSION}`,
               body: 'Checkout commit for detailed changelog on what has changed.',
               draft: true,
