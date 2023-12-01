@@ -1,0 +1,55 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "headers": [
+      {
+        "source": "(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "POST, GET"
+          },
+          {
+            "key": "Author",
+            "value": "visnkmr@github"
+          },
+          {
+            "key": "Github",
+            "value": "https://github.com/visnkmr/listallfrompscale"
+          }
+        ]
+      },
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "POST, GET"
+          },
+          {
+            "key": "Author",
+            "value": "visnkmr@github"
+          },
+          {
+            "key": "Github",
+            "value": "https://github.com/visnkmr/listallfrompscale"
+          }
+        ]
+      }
+    ]
+}
