@@ -15,6 +15,7 @@ import axios from "axios"
 import { Appslist } from './appslist';
 import { DataTable } from './commits/data-table';
 import { columns_full } from './commits/columns_full';
+import Sow from './sow';
 // let ft = (ipaddress:string):returnedjson=>{
 //   let { data,isError } = useQuery({ 
 //     // enabled:false,
@@ -52,7 +53,8 @@ export default function InitUI(){
   const [toastv] = useGlobalState("toast-visible");
   const [tablev] = useGlobalState("table-visible");
   const [toastcontent] = useGlobalState("toast");
-  const [ufvis,setufvis] = useState(true);
+  const [ufvis,setufvis] = useState(false);
+  const [sowvis,setsowvis] = useState(false);
   const [salvis,setsalvis] = useState(false);
   // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
@@ -272,6 +274,7 @@ export default function InitUI(){
               </div>
         <div className='flex justify-center'>
           <div className='grid-flow-row m-5 gap-2'>
+          <Button  className="rounded-md border shadow-md m-2" onClick={()=>{setsowvis(!sowvis)}}><Globe className='mr-2 h-4 w-4' />Send over internet</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md m-2" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
           <Button className="rounded-md border shadow-md m-2 " onClick={()=>{forceUpdate}}><RefreshCcw className='mr-2 h-4 w-4' />Reload</Button>
           <Button className="rounded-md border shadow-md m-2" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
@@ -326,6 +329,11 @@ export default function InitUI(){
           </div>
         </form>
         </div>
+        
+    </div>
+    <div className={`flex justify-center ${sowvis ? '' : 'hidden'}`}>
+
+        <Sow/>
         
     </div>
     <div className={`flex justify-center ${salvis ? '' : 'hidden'}`}>
