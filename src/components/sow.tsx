@@ -484,7 +484,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       <div className='grid grid-flow-row place-content-center'>
         {/* <h1>Simple Next.js App</h1> */}
         {/* <Button  className="rounded-md border shadow-md m-2"  onClick={handleConnect}>Connect</Button> */}
-        <div className='grid grid-flow-col'>
+        <div className='flex flex-row place-content-center'>
 
         <Button  className="rounded-md border shadow-md m-2"  onClick={()=>{
           savepeer.current=startconn(true)
@@ -527,6 +527,38 @@ const [fileList, setFileList] = React.useState<[File]>([])
         >
           {sendLoading ? "Sending" : "Send"}
         </Button>
+        </div>
+        <div className="flex flex-col place-content-center text-left">
+          {/* section detailing that this section allows to send data via webrtc across internet */}
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-4">Send Files via WebRTC</h2>
+            <p className="mb-4">This new option allows to send files via WebRTC across the internet.</p>
+            <ol className="list-decimal list-inside mb-4">
+            <li>
+                Tap on "Start session" on this device(device A) and copy the Share code shown here.
+              </li>
+              <li>
+                Go to{" "}
+                <a className="text-blue-600 underline" href="#">
+                  https://wfmossfrontend.vercel.app
+                </a>
+                .
+              </li>
+              <li>
+                Tap on "Send over internet" and then choose "Join session" on device B and Enter the Share code received from Device A.
+              </li>
+              <li>Once the device B is ready for connection.</li>
+              <li>Tap on connect on Device A.</li>
+              <li>Once connected you can send files.</li>
+            </ol>
+            <p>
+              If you encounter any issues while sending/receiving data post issues at{" "}
+              <a className="text-blue-600 underline" href="#">
+                https://github.com/visnkmr/wfm_wrtc/issues
+              </a>
+              .
+            </p>
+          </div>
         </div>
       </div>
     )
