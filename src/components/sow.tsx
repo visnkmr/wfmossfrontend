@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react'
 import axios from "axios";
 import { Button } from './ui/button';
+import {Loader2, Percent} from "lucide-react"
 // import './src/app/globals.css'
 
 // import nodeDatachannelPolyfill from 'node-datachannel/polyfill';
@@ -100,6 +101,8 @@ export default function Sow(){
   var savepeer=useRef();
   var showornot=useRef(false)
   var [readyforconn,setr]=useState(false)
+  var [ready,setready]=useState(true)
+  var [waittext,setwt]=useState("")
   var [readytosend,setrts]=useState(false)
   var [joinoth,setjoth]=useState(false)
   var peer:Peer=savepeer.current;
@@ -146,6 +149,8 @@ export default function Sow(){
         dlfd(saveui4.current)
         // dlfd(recdata)
         await submittodb(saveui4.current, recdata);
+        setready(true)
+        dlfd("Share code with reciever")
         showornot.current=true
         // await getoffer()
         // dlfd(uuidv4()); // Outputs a unique UUID
@@ -226,6 +231,8 @@ const setanswerdata = async (answer) => {
   dlfd("sent answer to db")
   setr(true)
   console.log(readyforconn)
+  // setready(true)
+  setwt("Waiting for connection")
   // setupchannel()
       //ably send the answer over the connection
   // await channel.publish('answer', answer);
@@ -297,7 +304,10 @@ fileSize:number
           }
         })
         peer.on('connect', () => {
-          dlfd('CONNECT')
+          // dlfd('CONNECT')
+          setready(true)
+          dlfd("Connected.")
+
           setrts(true)
 
           // ably.close()
@@ -311,6 +321,7 @@ fileSize:number
             receiveBuffer.push(data);
             receivedSize += data.byteLength;
             percentage = ((receivedSize / e.fileSize) * 100).toFixed(3);
+            
             peer.send(
               JSON.stringify({
                 type: "progress",
@@ -319,6 +330,7 @@ fileSize:number
             );
             if (e.fileSize !== 0 && e.fileName) {
               if (receivedSize == e.fileSize) {
+                setready(true)
                 const received = new Blob(receiveBuffer);
                 receiveBuffer = [];
                 download(received || '', e.fileName || "fileName", e.fileType)
@@ -331,6 +343,8 @@ fileSize:number
     
                 if (sData.type === "progress") {
                   console.log("progressing "+sData.value)
+                  setready(false)
+                  setwt("File transfer "+sData.value)
                 }
                 else if (sData.type === "fileinfo") {
                   e=JSON.parse(sData.value)
@@ -353,6 +367,8 @@ fileSize:number
   };
   
 const handleJoin=() => {
+  setready(false)
+  setwt("Initialising connection. Please wait.")
   savepeer.current=startconn(false)
   peer=savepeer.current
   dlfd(JSON.stringify(peer))
@@ -435,6 +451,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       let sendBuffer = [];
 
       const sendData = (file) => {
+            setready(false)
         if (file.size === 0) {
           dlfd("empty file")
         }
@@ -482,12 +499,18 @@ const [fileList, setFileList] = React.useState<[File]>([])
   
     return (
       <div className='grid grid-flow-row place-content-center'>
+        <div className='flex place-content-center m-5'>
+
+        <p className={!ready ? "flex flex-row items-center" : "hidden"}>{waittext}<Loader2 className='animate-spin ml-5'/></p>
+        </div>
         {/* <h1>Simple Next.js App</h1> */}
         {/* <Button  className="rounded-md border shadow-md m-2"  onClick={handleConnect}>Connect</Button> */}
         <div className='flex flex-row place-content-center'>
 
         <Button  className="rounded-md border shadow-md m-2"  onClick={()=>{
           savepeer.current=startconn(true)
+          setready(false)
+          setwt("Initialising connection. Please wait.")
           peer=savepeer.current
           initpeer()
         }}>Start Session</Button>
@@ -508,7 +531,10 @@ const [fileList, setFileList] = React.useState<[File]>([])
         <br />
         <div className={readyforconn ? "flex flex-col items-center" : "hidden"}>Ready for Connection</div>
         <br />
-        <Button className={showornot.current ? "block rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
+        <div className='flex place-content-center '>
+
+        <Button className={showornot.current ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
+        </div>
         <br />
         <div className={readytosend ? "flex flex-col items-center" : "hidden"}>
 
