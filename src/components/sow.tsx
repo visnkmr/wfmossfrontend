@@ -151,7 +151,7 @@ export default function Sow(){
         // dlfd(uuidv4()); // Outputs a unique UUID
         // const session = await kvstore.get(ui4);
         // dlfd(session)
-        setshowtext(saveui4.current)
+        setshowtext("Share code: "+saveui4.current)
         dlfd("initiator uid---->"+saveui4.current)
         // dlfd(ably)
         // onDataHandlerSetss = true;
@@ -481,7 +481,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       };
   
     return (
-      <div className='grid grid-flow-row'>
+      <div className='grid grid-flow-row place-content-center'>
         {/* <h1>Simple Next.js App</h1> */}
         {/* <Button  className="rounded-md border shadow-md m-2"  onClick={handleConnect}>Connect</Button> */}
         <div className='grid grid-flow-col'>
@@ -496,21 +496,21 @@ const [fileList, setFileList] = React.useState<[File]>([])
         </div>
         <br />
         <p className="text-center text-xl m-5" >
-         Share code:   {showtext}
+         {showtext}
         </p>
         <br />
-        <div className={joinoth ? "block" : "hidden"}>
+        <div className={joinoth ? "flex flex-col items-center" : "hidden"}>
 
         <textarea className="rounded-md border shadow-md m-2" placeholder="Enter code here" value={sdp} onChange={(e) => setSdp(e.target.value)} />
         <br />
         <Button  className="rounded-md border shadow-md m-2"  onClick={handleJoin}>Join Session</Button>
         </div>
         <br />
-        <div className={readyforconn ? "block" : "hidden"}>Ready for Connection</div>
+        <div className={readyforconn ? "flex flex-col items-center" : "hidden"}>Ready for Connection</div>
         <br />
         <Button className={showornot.current ? "block rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
         <br />
-        <div className={readytosend ? "block" : "hidden"}>
+        <div className={readytosend ? "flex flex-col items-center" : "hidden"}>
 
         <Button  className="rounded-md border shadow-md m-2"  onClick={sendMessage}>Send</Button>
         <br />
