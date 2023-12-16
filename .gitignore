@@ -29,3 +29,4 @@ out/
 tsconfig.tsbuildinfo
 synch.sh
 .git/
+bun.lockb
