@@ -101,6 +101,19 @@ export default function Sow(){
   var savepeer=useRef();
   var showornot=useRef(false)
   var [readyforconn,setr]=useState(false)
+
+  const initialMessages = [
+    {
+      id: '1',
+      text: 'Hello, World!',
+      time: new Date().toString(),
+      userName: 'User1',
+      userColorIndex: 1,
+    },
+    // More messages...
+   ];
+   const [messages, setMessages] = React.useState(initialMessages);
+
   var [ready,setready]=useState(true)
   var [waittext,setwt]=useState("")
   var [readytosend,setrts]=useState(false)
@@ -349,6 +362,17 @@ fileSize:number
                 else if (sData.type === "fileinfo") {
                   e=JSON.parse(sData.value)
                 }
+                else if (sData.type === "message") {
+                  // dlfd(JSON.stringify(sData.value))
+                  const newMessage = {
+                    id: Date.now().toString(),
+                    text: sData.value,
+                    time: new Date().toString(),
+                    userName: 'User2',
+                    userColorIndex: 2,
+                  };
+                  setMessages((prevMessages) => [...prevMessages, newMessage]);
+                }
               }
             } catch (error) {
               console.log("TryCatch", error);
@@ -382,23 +406,7 @@ const handleJoin=() => {
 }
 
 
-const sendMessage=()=> {
-  dlfd("sending message")
-  // send message at sender or receiver side
-  if (peer) {
-    let sm=(JSON.stringify(
-      {
-      dataType:MessageTypeDesc.OTHER,
-      message: 
-      'whatever' + Math.random()
 
-    } as DataTypeDesc))
-      // setm("Me : " + msg.value)
-      dlfd(sm)
-      peer.send(sm)
-      
-  }
-}
 const joinothenable=()=>{
 setjoth(true)
 }
@@ -496,7 +504,33 @@ const [fileList, setFileList] = React.useState<[File]>([])
         // }
     
       };
-  
+      let [text,addtext]=useState("")
+      const sendMessage=()=> {
+          // send message at sender or receiver side
+          if (peer) {
+              dlfd("sending message")
+            let sm=(JSON.stringify(
+              {
+              type:"message",
+              value: 
+              text
+      
+            }))
+              // setm("Me : " + msg.value)
+              dlfd(sm)
+              peer.send(sm)
+              // dlfd(JSON.stringify(sData.value))
+              const newMessage = {
+                  id: Date.now().toString(),
+                  text: text,
+                  time: new Date().toString(),
+                  userName: 'User2',
+                  userColorIndex: 2,
+              };
+              setMessages((prevMessages) => [...prevMessages, newMessage]);
+              
+          }
+      }
     return (
       <div className='grid grid-flow-row place-content-center'>
         <div className='flex place-content-center m-5'>
@@ -538,7 +572,24 @@ const [fileList, setFileList] = React.useState<[File]>([])
         <br />
         <div className={readytosend ? "flex flex-col items-center" : "hidden"}>
 
-        <Button  className="rounded-md border shadow-md m-2"  onClick={sendMessage}>Send</Button>
+        <ul>
+          {messages.map((message) => (
+            <li key={message.id}>
+              <span>{message.text}</span>
+              {/* <span>{message.time}</span> */}
+              {/* <span>{message.userName}</span> */}
+            </li>
+          ))}
+        </ul>
+        <textarea placeholder="Enter message to send here" className='bg-black text-white' value={text} onChange={(e) => {
+            addtext(e.target.value);
+            
+            }} />
+        <br />
+        {/* <p>
+            {mh}
+        </p> */}
+        <button onClick={sendMessage}>Send</button>
         <br />
         {/* <Fileup peer={savepeer.current}/> */}
         <input
