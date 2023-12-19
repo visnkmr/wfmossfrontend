@@ -263,6 +263,8 @@ export default function Sow({sl}){
 // {useEffect(()=>{
 const setanswerdata = async (answer) => {
   await submittodb(refpeer.current, answer);
+  setshowtext2(JSON.parse(answer).sdp)
+
   dlfd("sent answer to db",false)
   setr(true)
   console.log(readyforconn)
@@ -597,7 +599,12 @@ const [fileList, setFileList] = React.useState<[File]>([])
         <Button  className="rounded-md border shadow-md m-2"  onClick={handleJoin}>Join Session</Button>
         </div>
         <br />
-        <div className={readyforconn ? "flex flex-col items-center" : "hidden"}>Ready for Connection</div>
+        <div className={readyforconn ? "flex flex-col items-center" : "hidden"}>
+          Ready for Connection
+          <p className={ssdp ? "text-center text-md m-5" : "hidden"} >
+         {showtext2}</p>
+          <Button className={!ssdp ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={()=>sssdp(true)}>Show SDP Offer</Button>
+          </div>
         </div>
         
         
@@ -610,6 +617,8 @@ const [fileList, setFileList] = React.useState<[File]>([])
           </ul>
           </div>
         <div className={readytosend ? "flex flex-col items-center w-[100%] " : "hidden"}>
+          <div className='flex flex-col place-items-center rounded-md border shadow-md m-2 p-5'>
+
           <div className='flex flex-col m-5 w-[100%]'>
             <textarea className='w-[100%] text-center p-5' placeholder="Enter message to send here" value={text} onChange={(e) => {
                 addtext(e.target.value);
@@ -638,6 +647,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
           {sendLoading ? "Sending" : "Send"}
         </Button>
         </div>
+          </div>
         <section className="flex-1 overflow-y-auto space-y-4 w-[100%]">
         {messages.reverse().map((message) => (
           message.id === "me" ? (
