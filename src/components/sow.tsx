@@ -7,6 +7,8 @@ import {Loader2, Percent} from "lucide-react"
 
 // import nodeDatachannelPolyfill from 'node-datachannel/polyfill';
 import { useState } from 'react'
+import {Avatar,AvatarFallback,AvatarImage} from "./ui/avatar"
+import {Card,CardContent, CardFooter,CardHeader,CardTitle} from "./ui/card"
 // import { createRequire } from 'module';
 // import wrtc from "wrtc"
 
@@ -18,6 +20,7 @@ export enum MessageTypeDesc {
   OTHER = 'OTHER'
 
 }
+
 function submittodb(id:string,listtosave:object){
   console.log("whenhere:\n"+JSON.stringify(listtosave))
 
@@ -90,6 +93,14 @@ export const dlfd =(m)=>{
     console.log(m)
   }
 }
+interface comminfo{
+  
+      id: string,
+      text: string,
+      time: string,
+      userName: string,
+      userColorIndex: number,
+}
 export default function Sow(){
   const [sdp, setSdp] = useState('')
   // const [channel, setchannel] = useState<Ably.Types.RealtimeChannelPromise>()
@@ -102,14 +113,14 @@ export default function Sow(){
   var showornot=useRef(false)
   var [readyforconn,setr]=useState(false)
 
-  const initialMessages = [
-    {
-      id: '1',
-      text: 'Hello, World!',
-      time: new Date().toString(),
-      userName: 'User1',
-      userColorIndex: 1,
-    },
+  const initialMessages: comminfo[]  = [
+    // {
+    //   id: '1',
+    //   text: 'Hello, World!',
+    //   time: new Date().toString(),
+    //   userName: 'User1',
+    //   userColorIndex: 1,
+    // },
     // More messages...
    ];
    const [messages, setMessages] = React.useState(initialMessages);
@@ -521,10 +532,10 @@ const [fileList, setFileList] = React.useState<[File]>([])
               peer.send(sm)
               // dlfd(JSON.stringify(sData.value))
               const newMessage = {
-                  id: Date.now().toString(),
+                  id: "me",
                   text: text,
                   time: new Date().toString(),
-                  userName: 'User2',
+                  userName: 'me',
                   userColorIndex: 2,
               };
               setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -533,6 +544,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       }
     return (
       <div className='grid grid-flow-row place-content-center'>
+        <div className={!readytosend ? "flex flex-col items-center" : "hidden"}>
         <div className='flex place-content-center m-5'>
 
         <p className={!ready ? "flex flex-row items-center" : "hidden"}>{waittext}<Loader2 className='animate-spin ml-5'/></p>
@@ -556,6 +568,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
          {showtext}
         </p>
         <br />
+        <Button className={showornot.current ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
         <div className={joinoth ? "flex flex-col items-center" : "hidden"}>
 
         <textarea className="rounded-md border shadow-md m-2" placeholder="Enter code here" value={sdp} onChange={(e) => setSdp(e.target.value)} />
@@ -564,34 +577,26 @@ const [fileList, setFileList] = React.useState<[File]>([])
         </div>
         <br />
         <div className={readyforconn ? "flex flex-col items-center" : "hidden"}>Ready for Connection</div>
-        <br />
-        <div className='flex place-content-center '>
-
-        <Button className={showornot.current ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
         </div>
+        
+        
         <br />
-        <div className={readytosend ? "flex flex-col items-center" : "hidden"}>
-
-        <ul>
-          {messages.map((message) => (
-            <li key={message.id}>
-              <span>{message.text}</span>
-              {/* <span>{message.time}</span> */}
-              {/* <span>{message.userName}</span> */}
-            </li>
-          ))}
-        </ul>
-        <textarea placeholder="Enter message to send here" className='bg-black text-white' value={text} onChange={(e) => {
-            addtext(e.target.value);
-            
-            }} />
-        <br />
-        {/* <p>
-            {mh}
-        </p> */}
-        <button onClick={sendMessage}>Send</button>
-        <br />
+        <div className={readytosend ? "flex flex-col items-center  " : "hidden"}>
+          <div className='flex flex-col m-5'>
+            <textarea className='w-[100%]' placeholder="Enter message to send here" value={text} onChange={(e) => {
+                addtext(e.target.value);
+                
+                }} />
+            <br />
+            {/* <p>
+                {mh}
+            </p> */}
+            <button onClick={sendMessage}>Send</button>
+          </div>
+          <br />
         {/* <Fileup peer={savepeer.current}/> */}
+        <div className='flex flex-row'>
+
         <input
           type="file"
           onChange={addfile}
@@ -604,6 +609,55 @@ const [fileList, setFileList] = React.useState<[File]>([])
         >
           {sendLoading ? "Sending" : "Send"}
         </Button>
+        </div>
+        <section className="flex-1 overflow-y-auto space-y-4 w-[100%]">
+        {messages.reverse().map((message) => (
+          message.id === "me" ? (
+            <div className="flex space-x-4" id={message.id}>
+             <Card className="max-w-sm text-center">
+             {/* <CardHeader>
+                <CardTitle>{message.userName}</CardTitle>
+              </CardHeader> */}
+              <CardContent>
+                <p>{message.text}</p>
+              </CardContent>
+              <CardFooter>
+                <p className='text-xs'>{message.time}</p>
+              </CardFooter>
+            </Card>
+            <Avatar>
+              {/* <AvatarImage alt="Chat Partner" src="/placeholder-avatar.jpg" /> */}
+              <AvatarFallback>Me</AvatarFallback>
+            </Avatar>
+          </div>
+            // <li key={message.id}>
+            //   <span>{message.text}</span>
+            //   {/* <span>{message.time}</span> */}
+            //   {/* <span>{message.userName}</span> */}
+            // </li>
+          ) : (
+            <div className="flex justify-end space-x-4">
+             <Card className="max-w-sm bg-blue-100 text-center">
+              {/* <CardHeader>
+                <CardTitle>{message.userName}</CardTitle>
+              </CardHeader> */}
+              <CardContent>
+                <p>{message.text}</p>
+              </CardContent>
+              <CardFooter>
+                <p className='text-xs'>{message.time}</p>
+              </CardFooter>
+            </Card>
+            <Avatar>
+              {/* <AvatarImage alt="Chat Partner" src="/placeholder-avatar.jpg" /> */}
+              <AvatarFallback>{message.userName}</AvatarFallback>
+            </Avatar>
+          </div>
+          )
+        ))}
+        </section>
+          
+        
         </div>
         <div className="flex flex-col place-content-center text-left">
           {/* section detailing that this section allows to send data via webrtc across internet */}
