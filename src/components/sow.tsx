@@ -98,6 +98,8 @@ interface comminfo{
 export default function Sow({sl}){
   const initlogmsg:string[]=[]
   let [logs,setlog]=useState(initlogmsg)
+  let[ssdp,sssdp]=useState(false)
+  let [sc,ssc]=useState(false)
   const dlfd =(m,sensitive)=>{
     if(de){
       
@@ -139,6 +141,7 @@ export default function Sow({sl}){
   var refpeer=useRef("");
   // var ui4=refpeer.current;
   const [showtext, setshowtext] = useState("")
+  const [showtext2, setshowtext2] = useState("")
 //  dlfd(peer)
   const startconn=(amitheinitiator)=>{
     // useEffect(()=>{
@@ -180,14 +183,16 @@ export default function Sow({sl}){
         // dlfd(recdata)
         await submittodb(refpeer.current, recdata);
         setready(true)
-        dlfd("Share code with reciever",false)
+        // dlfd("Share code with reciever",false)
         showornot.current=true
         // await getoffer()
         // dlfd(uuidv4()); // Outputs a unique UUID
         // const session = await kvstore.get(ui4);
         // dlfd(session)
         setshowtext("Share code: "+refpeer.current)
+        setshowtext2(JSON.parse(recdata).sdp)
         dlfd("share code---->"+refpeer.current,false)
+        ssc(true)
         // dlfd(ably)
         // onDataHandlerSetss = true;
         //  try{
@@ -322,13 +327,13 @@ fileSize:number
           dlfd('recieved data',false)
           // setshowtext(JSON.stringify(data))
           if(data.type==="offer"){
-            dlfd("offer signal recieved--->"+JSON.parse(recdata),false)
+            dlfd("offer signal recieved--->"+JSON.parse(recdata).sdp,false)
             // dlfd(recdata)
             // setoffer(recdata)
             // dlfd(offer)
             setofferdata(recdata)
           }else if(data.type==="answer"){
-            dlfd("answer signal recieved---->"+JSON.parse(recdata),false)
+            dlfd("answer signal recieved---->"+JSON.parse(recdata).sdp,false)
             setanswerdata(recdata)
             dlfd((peer),true)
           }
@@ -563,16 +568,26 @@ const [fileList, setFileList] = React.useState<[File]>([])
           savepeer.current=startconn(true)
           setready(false)
           setwt("Initialising connection. Please wait.")
+          
           peer=savepeer.current
           initpeer()
         }}>Start Session</Button>
         <br/>
         <Button  className="rounded-md border shadow-md m-2"  onClick={joinothenable}>Join Session </Button>
         </div>
+        <div className={sc ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"}>
+          
         <br />
-        <p className="text-center text-xl m-5" >
-         {showtext}
-        </p>
+        <ul className='flex-col'>
+
+        <li className="text-center text-xl m-5" >
+         {showtext}</li>
+         
+         <li className={ssdp ? "text-center text-md m-5" : "hidden"} >
+         {showtext2}</li>
+        </ul>
+        <Button className={!ssdp ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={()=>sssdp(true)}>Show SDP Offer</Button>
+        </div>
         <br />
         <Button className={showornot.current ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
         <div className={joinoth ? "flex flex-col items-center" : "hidden"}>
