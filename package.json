@@ -1,6 +1,6 @@
 {
   "name": "wfmossfrontend",
-  "version": "1.0.118",
+  "version": "2.0.0",
   "description": "OSS Frontend for wireless file manager",
   "scripts": {
     "start": "next start",
