@@ -55,6 +55,7 @@ export default function InitUI(){
   const [toastcontent] = useGlobalState("toast");
   const [ufvis,setufvis] = useState(false);
   const [sowvis,setsowvis] = useState(false);
+  const [sl,setsl] = useState(false);
   const [salvis,setsalvis] = useState(false);
   // const [helpvis,sethvis] = useState(false);
   const searchParams = useSearchParams();
@@ -275,6 +276,10 @@ export default function InitUI(){
         <div className='flex justify-center'>
           <div className='grid-flow-row m-5 gap-2'>
           <Button  className="rounded-md border shadow-md m-2" onClick={()=>{setsowvis(!sowvis)}}><Globe className='mr-2 h-4 w-4' />Send over internet</Button>
+          <Button  className="rounded-md border shadow-md m-2" onClick={()=>{
+            setsl(!sl);
+            setsowvis(true)
+            }}><Globe className='mr-2 h-4 w-4' />Logs</Button>
           <Button variant={"destructive"} className="rounded-md border shadow-md m-2" onClick={()=>{setufvis(!ufvis)}}><Upload className='mr-2 h-4 w-4' />Upload</Button>
           <Button className="rounded-md border shadow-md m-2 " onClick={()=>{forceUpdate}}><RefreshCcw className='mr-2 h-4 w-4' />Reload</Button>
           <Button className="rounded-md border shadow-md m-2" onClick={()=>{setipvis(!ipvis)}}><Globe className='mr-2 h-4 w-4' />IP</Button>
@@ -333,7 +338,7 @@ export default function InitUI(){
     </div>
     <div className={`flex justify-center ${sowvis ? '' : 'hidden'}`}>
 
-        <Sow/>
+        <Sow sl={sl}/>
         
     </div>
     <div className={`flex justify-center ${salvis ? '' : 'hidden'}`}>

@@ -87,12 +87,6 @@ export interface DataTypeDesc {
   message?: string
 }
 const de=true;
-export const dlfd =(m)=>{
-  if(de){
-
-    console.log(m)
-  }
-}
 interface comminfo{
   
       id: string,
@@ -101,7 +95,19 @@ interface comminfo{
       userName: string,
       userColorIndex: number,
 }
-export default function Sow(){
+export default function Sow({sl}){
+  const initlogmsg:string[]=[]
+  let [logs,setlog]=useState(initlogmsg)
+  const dlfd =(m,sensitive)=>{
+    if(de){
+      
+      console.log(m)
+      if(!sensitive){
+
+        setlog((plog) => [...plog, m]);
+      }
+    }
+  }
   const [sdp, setSdp] = useState('')
   // const [channel, setchannel] = useState<Ably.Types.RealtimeChannelPromise>()
   // var channel:Ably.Types.RealtimeChannelPromise;
@@ -130,8 +136,8 @@ export default function Sow(){
   var [readytosend,setrts]=useState(false)
   var [joinoth,setjoth]=useState(false)
   var peer:Peer=savepeer.current;
-  var saveui4=useRef("");
-  // var ui4=saveui4.current;
+  var refpeer=useRef("");
+  // var ui4=refpeer.current;
   const [showtext, setshowtext] = useState("")
 //  dlfd(peer)
   const startconn=(amitheinitiator)=>{
@@ -169,19 +175,19 @@ export default function Sow(){
       // if(!onDataHandlerSetss){
         let randomNumber = Math.floor(Date.now() % 10000);
         console.log(randomNumber);
-        saveui4.current=randomNumber.toString();
-        dlfd(saveui4.current)
+        refpeer.current=randomNumber.toString();
+        dlfd(refpeer.current,true)
         // dlfd(recdata)
-        await submittodb(saveui4.current, recdata);
+        await submittodb(refpeer.current, recdata);
         setready(true)
-        dlfd("Share code with reciever")
+        dlfd("Share code with reciever",false)
         showornot.current=true
         // await getoffer()
         // dlfd(uuidv4()); // Outputs a unique UUID
         // const session = await kvstore.get(ui4);
         // dlfd(session)
-        setshowtext("Share code: "+saveui4.current)
-        dlfd("initiator uid---->"+saveui4.current)
+        setshowtext("Share code: "+refpeer.current)
+        dlfd("share code---->"+refpeer.current,false)
         // dlfd(ably)
         // onDataHandlerSetss = true;
         //  try{
@@ -251,8 +257,8 @@ export default function Sow(){
 // if(answer.trim().length!==0)
 // {useEffect(()=>{
 const setanswerdata = async (answer) => {
-  await submittodb(saveui4.current, answer);
-  dlfd("sent answer to db")
+  await submittodb(refpeer.current, answer);
+  dlfd("sent answer to db",false)
   setr(true)
   console.log(readyforconn)
   // setready(true)
@@ -264,28 +270,28 @@ const setanswerdata = async (answer) => {
     // setshowtext(session)
 }
 const getoffer=async()=>{
-console.log(saveui4.current)
-var resp=await getfromdb(saveui4.current);
+console.log(refpeer.current)
+var resp=await getfromdb(refpeer.current);
 
 // Wait for the axios request to complete
 var response = await resp;
 
 // Access the data property of the response
 var offer = response.data.data;
-dlfd("got offer"+JSON.parse(offer))
+dlfd("got offer---->"+JSON.parse(offer),false)
   peer.signal(JSON.parse(offer))
 
 }
 const getanswer=async()=>{
-console.log(saveui4.current)
-var resp=await getfromdb(saveui4.current);
+console.log(refpeer.current)
+var resp=await getfromdb(refpeer.current);
 
 // Wait for the axios request to complete
 var response = await resp;
 
 // Access the data property of the response
 var answer = response.data.data;
-dlfd("answerr recieved--------->"+answer)
+dlfd("answerr recieved--------->"+answer,false)
 peer.signal(JSON.parse(answer))
   // peer.signal(offer)
 
@@ -309,28 +315,28 @@ fileSize:number
     if (peer) {
       // Check if 'data' event listener has already been set up
       // if (!onDataHandlerSet) {
-        peer.on('error', err => dlfd('error'+ err))
+        peer.on('error', err => dlfd('error'+ err,false))
 
         peer.on('signal', data => {
           let recdata=JSON.stringify(data)
-          dlfd('SIGNAL'+ recdata)
+          dlfd('recieved data',false)
           // setshowtext(JSON.stringify(data))
           if(data.type==="offer"){
-            dlfd("offer signal recieved")
+            dlfd("offer signal recieved--->"+JSON.parse(recdata),false)
             // dlfd(recdata)
             // setoffer(recdata)
             // dlfd(offer)
             setofferdata(recdata)
           }else if(data.type==="answer"){
-            dlfd("answer signal recieved")
+            dlfd("answer signal recieved---->"+JSON.parse(recdata),false)
             setanswerdata(recdata)
-            dlfd((peer))
+            dlfd((peer),true)
           }
         })
         peer.on('connect', () => {
           // dlfd('CONNECT')
           setready(true)
-          dlfd("Connected.")
+          dlfd("Connected.",false)
 
           setrts(true)
 
@@ -406,11 +412,11 @@ const handleJoin=() => {
   setwt("Initialising connection. Please wait.")
   savepeer.current=startconn(false)
   peer=savepeer.current
-  dlfd(JSON.stringify(peer))
+  dlfd(JSON.stringify(peer),true)
   initpeer()
   // dlfd("offer got from kvstore----->"+sdp)
   
-  saveui4.current=sdp
+  refpeer.current=sdp
   // setupchannel()
   
   getoffer()
@@ -428,12 +434,12 @@ const [fileList, setFileList] = React.useState<[File]>([])
       if(fileList){
     
         if (fileList.length === 0) {
-            dlfd("Please select file")
+            dlfd("Please select file",false)
             return
         }
-        dlfd(peer)
+        dlfd(peer,true)
         if (!peer) {
-            dlfd("Please select a connection")
+            dlfd("Please select a connection",false)
             return
         }
         try {
@@ -449,11 +455,11 @@ const [fileList, setFileList] = React.useState<[File]>([])
             //   fileType: file.type
             // })
             await setSendLoading(false)
-            dlfd("Send file successfully")
+            dlfd("File Sent successfully",false)
         } catch (err) {
             await setSendLoading(false)
-            dlfd(err)
-            dlfd("Error when sending file")
+            // dlfd(err)
+            dlfd("Error when sending file--->"+err,false)
         }
       }
     }
@@ -472,7 +478,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       const sendData = (file) => {
             setready(false)
         if (file.size === 0) {
-          dlfd("empty file")
+          dlfd("empty file",false)
         }
         const chunkSize = 32000;
         var fileReader = new FileReader();
@@ -519,7 +525,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       const sendMessage=()=> {
           // send message at sender or receiver side
           if (peer) {
-              dlfd("sending message")
+              dlfd("sending message",false)
             let sm=(JSON.stringify(
               {
               type:"message",
@@ -528,7 +534,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
       
             }))
               // setm("Me : " + msg.value)
-              dlfd(sm)
+              dlfd(sm,false)
               peer.send(sm)
               // dlfd(JSON.stringify(sData.value))
               const newMessage = {
@@ -571,7 +577,7 @@ const [fileList, setFileList] = React.useState<[File]>([])
         <Button className={showornot.current ? "flex place-content-center rounded-md border shadow-md m-2" : "hidden"} onClick={getanswer}>Connect</Button>
         <div className={joinoth ? "flex flex-col items-center" : "hidden"}>
 
-        <textarea className="rounded-md border shadow-md m-2" placeholder="Enter code here" value={sdp} onChange={(e) => setSdp(e.target.value)} />
+        <textarea className="rounded-md border shadow-md m-2 text-center p-5" placeholder="Enter code here" value={sdp} onChange={(e) => setSdp(e.target.value)} />
         <br />
         <Button  className="rounded-md border shadow-md m-2"  onClick={handleJoin}>Join Session</Button>
         </div>
@@ -581,9 +587,16 @@ const [fileList, setFileList] = React.useState<[File]>([])
         
         
         <br />
-        <div className={readytosend ? "flex flex-col items-center  " : "hidden"}>
-          <div className='flex flex-col m-5'>
-            <textarea className='w-[100%]' placeholder="Enter message to send here" value={text} onChange={(e) => {
+        <div className={sl ? "flex flex-col items-center w-[100%] " : "hidden"}>
+          <ul>
+            {logs.reverse().map((message, index) => (
+              <li key={index}><span className='text-gray-500 pr-3'>{index+1}</span>{message}</li>
+            ))}
+          </ul>
+          </div>
+        <div className={readytosend ? "flex flex-col items-center w-[100%] " : "hidden"}>
+          <div className='flex flex-col m-5 w-[100%]'>
+            <textarea className='w-[100%] text-center p-5' placeholder="Enter message to send here" value={text} onChange={(e) => {
                 addtext(e.target.value);
                 
                 }} />
