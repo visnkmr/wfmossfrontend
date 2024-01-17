@@ -11,7 +11,7 @@ interface appprops{
 export default function Eapp({app}:appprops){
     {
         let iconurl="/api/icon?pkgname="+app.pkgname
-        console.log(`data:image/png;base64,${getappicon(iconurl)}`)
+        // console.log(`data:image/png;base64,${getappicon(iconurl)}`)
         return (
             // <p>`data:image/png;base64,${getappicon(iconurl)}`</p>
             <Button 
@@ -47,7 +47,7 @@ export default function Eapp({app}:appprops){
                       });
                     }
                   }>
-                <img  src={`data:image/png;base64,${getappicon(iconurl)}`} alt="App Icon"  className="h-full object-contain p-3" />
+                {/* <img  src={`data:image/png;base64,${getappicon(iconurl)}`} alt="App Icon"  className="h-full object-contain p-3" /> */}
                 <p className="line-clamp-1">
                 {app.name}
                 </p>
