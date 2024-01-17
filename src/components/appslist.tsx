@@ -22,13 +22,13 @@ let listapps=()=>{
       console.log(response.data)
         return response.data
     },
-    retry:false,
+    // retry:false,
     // refetchOnMount:true,
     
-    cacheTime:0,
+    // cacheTime:0,
     
-    staleTime:0,
-    // refetchOnWindowFocus:false,
+    // staleTime:0,
+    refetchOnWindowFocus:false,
     
     
   
@@ -39,7 +39,7 @@ let listapps=()=>{
 }
 
 
-export function Appslist({url}:Applistprops){
+export default function Appslist(){
     const options = {
         includeScore: true,
         keys:['name']

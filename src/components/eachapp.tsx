@@ -69,13 +69,13 @@ let getappicon=(name:string)=>{
         // console.log(response.data)
           return response.data
       },
-      retry:false,
-      // refetchOnMount:true,
+      // retry:false,
+      // // refetchOnMount:true,
       
-      cacheTime:0,
+      // cacheTime:0,
       
-      staleTime:0,
-      // refetchOnWindowFocus:false,
+      // staleTime:0,
+      refetchOnWindowFocus:false,
       
       
     
