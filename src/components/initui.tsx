@@ -12,7 +12,8 @@ import { Button } from './ui/button';
 import toast, { Toaster } from 'react-hot-toast';
 import {setGlobalState, useGlobalState} from "../lib/GlobalStateContext"
 import axios from "axios"
-import { Appslist } from './appslist';
+import dynamic from 'next/dynamic';
+const Appslist = dynamic(() => import('./appslist'));
 import { DataTable } from './commits/data-table';
 import { columns_full } from './commits/columns_full';
 import Sow from './sow';
@@ -342,7 +343,7 @@ export default function InitUI(){
         
     </div>
     <div className={`flex justify-center ${salvis ? '' : 'hidden'}`}>
-          <Appslist url={url}/>
+          <Appslist/>
         </div>
 
         {/* <div className="flex justify-center p-5">
