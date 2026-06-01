@@ -75,7 +75,7 @@ export default function InitUI(){
     const [ipaddress, setipaddress] = useState(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"");
     setGlobalState("ipaddress",ipaddress)
     if(!url.includes("http"))
-    url=`http://${ipaddress}/api/json/v1`;
+    url=`https://${ipaddress}/api/json/v1`;
     // if(ipaddress &&(searchParams!.get('ipaddress')!==null?searchParams!.get('ipaddress')!:"")!=="" && ft.current){
     //   console.log("rhere")
     //   console.log("ipaddress"+ipaddress)
@@ -102,7 +102,7 @@ export default function InitUI(){
     )
     {
       if(firstime.current && inputRef.current){
-        setGlobalState("ipaddress",`http://${inputRef.current.value}/api/json/v1`)
+        setGlobalState("ipaddress",`https://${inputRef.current.value}/api/json/v1`)
         firstime.current=false
       }
       setGlobalState("toast-visible",false)
@@ -152,7 +152,7 @@ export default function InitUI(){
       // setGlobalState("toast","connecting to "+inputRef.current.value)
       // 👇 "inputRef.current.value" is input value
       console.log(inputRef.current.value);
-      setGlobalState("ipaddress",`http://${inputRef.current.value}/api/json/v1`);
+      setGlobalState("ipaddress",`https://${inputRef.current.value}/api/json/v1`);
       setipaddress(`${inputRef.current.value}`);
       // if(ft(ipaddress))
       // setuua(ft(ipaddress).percentsizefree)
@@ -197,7 +197,7 @@ export default function InitUI(){
       // xhr.send(file);
       axios.request({
         method: "post",
-        url: `http://${ipaddress}/api/upload`,
+        url: `https://${ipaddress}/api/upload`,
         data: formData,
         // onUploadProgress: (progressEvent) => {
         //   progressEvent.total
@@ -295,8 +295,8 @@ export default function InitUI(){
 
             }}><HardDrive className='mr-2 h-4 w-4' />Files</Button>
           
-          <Link className={`${showoldv?"":"hidden " }inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md m-2`} href={`http://${ipaddress}/old`}><History className='mr-2 h-4 w-4' />Old version</Link>
-          <Link className="m-2 inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" target="_blank" href='http://github.com/visnkmr/wfm/issues'><HelpCircle className='mr-2 h-4 w-4' />Help</Link>
+          <Link className={`${showoldv?"":"hidden " }inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md m-2`} href={`https://${ipaddress}/old`}><History className='mr-2 h-4 w-4' />Old version</Link>
+          <Link className="m-2 inline-flex items-center justify-center py-2 px-4 button font-medium rounded-md border shadow-md" target="_blank" href='https://github.com/visnkmr/wfm/issues'><HelpCircle className='mr-2 h-4 w-4' />Help</Link>
           </div>
         </div>
         
